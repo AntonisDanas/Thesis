@@ -5,7 +5,7 @@ using UnityEngine;
 public class Quest
 {
     private List<QuestEvent> m_questEvents;
-    private QuestEvent m_activeQuest;
+    private QuestEvent m_activeEvent;
     private QuestEvent m_nextEvent;
     private int m_questEventCounter;
 
@@ -25,7 +25,7 @@ public class Quest
         if (!(m_questEvents.Count > 0)) return;
 
         m_questEvents[0].SetActive(this);
-        m_activeQuest = m_questEvents[0];
+        m_activeEvent = m_questEvents[0];
 
         m_nextEvent = m_questEvents.Count >= 2 ? m_questEvents[1] : null;
         m_questEventCounter++;
@@ -33,7 +33,7 @@ public class Quest
 
     public void QuestEventCompleted()
     {
-        m_activeQuest.SetInactive();
+        m_activeEvent.SetInactive();
         if (m_nextEvent == null)
         {
             CompleteQuest();
@@ -41,7 +41,7 @@ public class Quest
         }
 
         m_nextEvent.SetActive(this);
-        m_activeQuest = m_nextEvent;
+        m_activeEvent = m_nextEvent;
         m_questEventCounter++;
 
         Debug.Log(m_questEventCounter - 1 + " of " + m_questEvents.Count);

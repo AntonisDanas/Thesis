@@ -65,6 +65,6 @@ public class EntityEventBroker
 
     private static bool CanPlayerPickUpObject()
     {
-        return false;  // TODO check condition to pickup fail
+        return true;  // TODO check condition to pickup fail
     }
 }

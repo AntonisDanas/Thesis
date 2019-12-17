@@ -3,30 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Interactable : MonoBehaviour
+public class Interactable : WorldEntity
 {
-    [HideInInspector]
-    public NavMeshAgent navMeshAgent;
-    private bool hasInteracted;
-
-    public virtual void MoveToInteract(NavMeshAgent navMeshAgent)
-    {
-        this.navMeshAgent = navMeshAgent;
-        navMeshAgent.destination = this.transform.position;
-
-        
-    }
 
     void Update()
     {
-        if(!hasInteracted && navMeshAgent != null && !navMeshAgent.pathPending)
-        {
-            if(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
-            {
-                    Interact();
-                    hasInteracted = true;
-            }
-        }
 
     }
 
