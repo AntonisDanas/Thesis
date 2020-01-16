@@ -11,7 +11,7 @@ public class UITest : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        EntityEventBroker.OnObjectPickUpSuccess += GetInterObj;
+        //EntityEventBroker.OnObjectPickUpSuccess += GetInterObj;
     }
 
     // Update is called once per frame

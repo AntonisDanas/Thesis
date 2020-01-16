@@ -2,35 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestGenerator : MonoBehaviour
+public class QuestGenerator
 {
-    private List<WorldEntity> m_worldEntities;
+    private QuestScheduler m_questScheduler;
 
-    private void Awake()
+    public QuestGenerator(QuestScheduler qs)
     {
-        m_worldEntities = new List<WorldEntity>();
-        EntityEventBroker.OnEntityEnroll += EnrollEntity;
-        EntityEventBroker.OnEntityDeath += EntityDied;
-    }
-
-    private void Update()
-    {
-
-    }
-
-    public void SetQuestToEntity(QuestEntity entity)
-    {
-        //entity.HasQuestEvent();
-    }
-
-    private void EnrollEntity(WorldEntity entity)
-    {
-        m_worldEntities.Add(entity);
-        Debug.Log(entity.name + " added to the QuestGenerator");
-    }
-
-    private void EntityDied(WorldEntity invoker, WorldEntity recepient)
-    {
-        //print(invoker.name + " killed " + recepient.name);
+        m_questScheduler = qs;
     }
 }

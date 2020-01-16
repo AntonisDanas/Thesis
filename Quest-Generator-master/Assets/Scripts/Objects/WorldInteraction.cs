@@ -7,10 +7,10 @@ public class WorldInteraction : MonoBehaviour
 
     void Start()
     {
-        EntityEventBroker.OnObjectPickUpSuccess += GetObjInter;
+        //EntityEventBroker.OnObjectPickUpSuccess += GetObjInter;
         EntityEventBroker.OnObjectPickUpFail += GetObjInterFail;
 
-        EntityEventBroker.OnCharacterInteract += GetCharInter;
+        //EntityEventBroker.OnCharacterInteract += GetCharInter;
     }
 
     void GetObjInter(InteractableObject obj)
@@ -39,9 +39,17 @@ public class WorldInteraction : MonoBehaviour
     void GetInteraction()
     {
         Interactable interactable = GetInteractedObject();
-        if (interactable != null)
+        if (interactable != null && interactable is InteractableCharacter)
         {
-            interactable.Interact();
+            var i = interactable as InteractableCharacter;
+            if (i.HasQuestAvailable())
+                i.InvokeQuest();
+            else if (i.CanCompleteQuest())
+                i.CompleteQuest();
+            //print("Character has Quest");
+            else
+                i.KillCharacter(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
+                //i.Interact(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
         }
     }
 

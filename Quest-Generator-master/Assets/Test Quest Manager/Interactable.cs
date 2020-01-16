@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class Interactable : WorldEntity
 {
 
-    void Update()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
-    public virtual void Interact()
+    public virtual void Interact(WorldEntity invoker)
     {
         print("Interacting with base class.");
     }

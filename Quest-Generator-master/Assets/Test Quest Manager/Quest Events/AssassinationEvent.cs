@@ -5,62 +5,45 @@ using UnityEngine;
 
 public class AssassinationEvent : QuestEvent
 {
-    private WorldEntity m_invoker = null;
-    private WorldEntity m_target = null;
-    private bool m_isActive = false;
-    private Quest m_questReference = null;
 
-
-    public AssassinationEvent(WorldEntity invoker, WorldEntity target)
+    public AssassinationEvent(WorldEntity target)
     {
-        m_invoker = invoker;
-        m_target = target;
-        m_isActive = false;
+        Target = target;
+        IsActive = false;
     }
 
     public override void SetActive(Quest quest)
     {
-        m_isActive = true;
-        SubscribeToEventHandler();
-        SetQuestMarker();
-        m_questReference = quest;
+        IsActive = true;
+        Quest = quest;
+        (Target as InteractableCharacter).ActivateQuestMark();
+    }
+
+    public override void TriggerEvent(WorldEntity invoker)
+    {
+        //TODO
     }
 
     public override void SetInactive()
     {
-        m_isActive = false;
-        UnsubscribeToEventHandler();
-        DestroyQuestMarker();
-    }
-
-    protected override void DestroyQuestMarker()
-    {
-        (m_target as QuestEntity).DestroyQuestMarker();
-    }
-
-    protected override void SetQuestMarker()
-    {
-        (m_target as QuestEntity).SetQuestMarker();
-    }
-
-    protected override void SubscribeToEventHandler()
-    {
-        EntityEventBroker.OnEntityDeath += CheckIfEventTriggered;
-    }
-
-    protected override void UnsubscribeToEventHandler()
-    {
-        EntityEventBroker.OnEntityDeath -= CheckIfEventTriggered;
+        IsActive = false;
+        (Target as InteractableCharacter).DeactivateQuestMark();
     }
 
     private void CheckIfEventTriggered(WorldEntity invoker, WorldEntity recepient)
     {
-        if (!m_isActive) return;
+        if (!IsActive) return;
 
-        if (invoker == m_invoker && recepient == m_target)
+        if ((recepient as InteractableCharacter) != Target) return;
+        if (!(invoker is InteractableCharacter)) return;
+
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>();
+        if ((invoker as InteractableCharacter) == player)
         {
-            Debug.Log("Quest: " + invoker.name + " killed " + recepient.name);
-            m_questReference.QuestEventCompleted();
+            Debug.Log("Player killed target");
+            Quest.QuestEventCompleted();
         }
+        else
+            Debug.Log("Quest Failed");
     }
 }

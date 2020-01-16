@@ -10,9 +10,9 @@ public class InteractableObject : Interactable
     [SerializeField] private string m_objectName;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -21,8 +21,8 @@ public class InteractableObject : Interactable
         
     }
 
-    public override void Interact()
+    public override void Interact(WorldEntity invoker)
     {
-        if (EntityEventBroker.PickUpObject(this)) Destroy(gameObject);
+        //if (EntityEventBroker.PickUpObject(this)) Destroy(gameObject);
     }
 }

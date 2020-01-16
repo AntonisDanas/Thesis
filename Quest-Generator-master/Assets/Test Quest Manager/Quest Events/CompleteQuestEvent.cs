@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvokeQuestEvent : QuestEvent
+public class CompleteQuestEvent : QuestEvent
 {
-
-    public InvokeQuestEvent(InteractableCharacter target)
+    public CompleteQuestEvent(WorldEntity target)
     {
-        IsActive = false;
-
         Target = target;
+        IsActive = false;
     }
 
     public override void TriggerEvent(WorldEntity invoker)
@@ -17,7 +15,7 @@ public class InvokeQuestEvent : QuestEvent
         if (!IsActive) return;
         if (Quest == null) return;
 
-        EntityEventBroker.InvokeQuest(Quest);
+        EntityEventBroker.QuestCompleted(Quest);
     }
 
     public override void SetActive(Quest quest)
@@ -32,5 +30,5 @@ public class InvokeQuestEvent : QuestEvent
         IsActive = false;
         (Target as InteractableCharacter).DeactivateQuestMark();
     }
-
+    
 }
