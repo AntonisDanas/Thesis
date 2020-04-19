@@ -10,8 +10,8 @@ using UnityEditor;
 [Serializable]
 public class SG_SpaceNode : SG_NodeBase
 {
-
     public List<string> Labels;
+    public Dictionary<string, object> Attributes;
 
     public override void InitNode(string nodeName)
     {

@@ -6,23 +6,43 @@ public class InteractableCharacter : Interactable
 {
     public string CharacterName { get { return m_characterName; } }
 
+    public List<Relationship> OutgoingRelationships;
 
+    [SerializeField] private SG_SpaceNode m_graphInstance;
     [SerializeField] private string m_characterName;
     [SerializeField] private GameObject m_questMarkPlaceholder;
 
     private InvokeQuestEvent m_invokeQuestRef;
     private CompleteQuestEvent m_completeQuestRef;
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+
+        if (m_graphInstance == null)
+        {
+            Debug.Log("No Graph Instance for Character");
+            return;
+        }
+
+        m_characterName = m_graphInstance.NodeName;
+        OutgoingRelationships = FindObjectOfType<GraphHandler>().GetAllOutgoingRelationships(m_graphInstance.Index);
+        EntityEventBroker.OnCharactersStatusUpdate += UpdateCharacterStatus;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateCharacterStatus(Dictionary<int, CharacterStatus> changedCharacters)
     {
-        
+        if (!changedCharacters.ContainsKey(m_graphInstance.Index))
+            return;
+
+        m_graphInstance.Labels[0] = changedCharacters[m_graphInstance.Index].Label;
+        m_graphInstance.Attributes = changedCharacters[m_graphInstance.Index].Attributes;
+        OutgoingRelationships = changedCharacters[m_graphInstance.Index].OutgoingRelationships;
+    }
+
+    public int GetIndexOfGraphInstance()
+    {
+        return m_graphInstance.Index;
     }
 
     public bool HasQuestAvailable()
@@ -82,6 +102,7 @@ public class InteractableCharacter : Interactable
 
     public void KillCharacter(WorldEntity attacker)
     {
+        EntityEventBroker.OnCharactersStatusUpdate -= UpdateCharacterStatus;
         EntityEventBroker.EntityDeath(attacker, this);
     }
 }

@@ -10,6 +10,7 @@ using UnityEditor;
 [Serializable]
 public class SG_NodeBase : ScriptableObject
 {
+    public int Index;
     public string NodeName;
     public Rect NodeRect;
     public SG_Graph ParentGraph;

@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8193312118541125349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Flower
+  m_EditorClassIdentifier: 
+  Index: 5
+  NodeName: Flower
+  NodeRect:
+    serializedVersion: 2
+    x: 300
+    y: 506
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - Resource
+--- !u!114 &-7221923487145406230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_DislikerDislikesOwner
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -6227551617335280405}
+  EndNode: {fileID: 7768801433575699454}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-6227551617335280405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Disliker
+  m_EditorClassIdentifier: 
+  Index: 4
+  NodeName: Disliker
+  NodeRect:
+    serializedVersion: 2
+    x: 175
+    y: 296
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &-6020574033039579969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_HaterHatesOwner
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -3789263167109809320}
+  EndNode: {fileID: 7768801433575699454}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-3789263167109809320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Hater
+  m_EditorClassIdentifier: 
+  Index: 3
+  NodeName: Hater
+  NodeRect:
+    serializedVersion: 2
+    x: 812
+    y: 248
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824861efc8e212340ac7523f3087fe90, type: 3}
+  m_Name: Object Test
+  m_EditorClassIdentifier: 
+  GraphName: Object Test
+  Nodes:
+  - {fileID: 7768801433575699454}
+  - {fileID: 5582387527405202022}
+  - {fileID: -3789263167109809320}
+  - {fileID: -6227551617335280405}
+  - {fileID: -8193312118541125349}
+  - {fileID: 7326096578129132359}
+  - {fileID: 8952501150058615589}
+  Edges:
+  - {fileID: -7221923487145406230}
+  - {fileID: -6020574033039579969}
+  - {fileID: 7840709145383968915}
+  InTransition: 0
+--- !u!114 &5582387527405202022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Sword
+  m_EditorClassIdentifier: 
+  Index: 2
+  NodeName: Sword
+  NodeRect:
+    serializedVersion: 2
+    x: 475
+    y: 340
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - Object
+--- !u!114 &7326096578129132359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Viking
+  m_EditorClassIdentifier: 
+  Index: 6
+  NodeName: Viking
+  NodeRect:
+    serializedVersion: 2
+    x: 626
+    y: 506
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - Enemy
+--- !u!114 &7768801433575699454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Owner
+  m_EditorClassIdentifier: 
+  Index: 1
+  NodeName: Owner
+  NodeRect:
+    serializedVersion: 2
+    x: 425
+    y: 183
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &7840709145383968915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_OwnerOwnsSword
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 7768801433575699454}
+  EndNode: {fileID: 5582387527405202022}
+  Label: Owns
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &8952501150058615589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Player
+  m_EditorClassIdentifier: 
+  Index: 7
+  NodeName: Player
+  NodeRect:
+    serializedVersion: 2
+    x: 199
+    y: 77
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - Player

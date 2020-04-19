@@ -7,9 +7,9 @@ public class InvokeQuestEvent : QuestEvent
 
     public InvokeQuestEvent(InteractableCharacter target)
     {
-        IsActive = false;
-
         Target = target;
+        IsActive = false;
+        IsProgressing = false;
     }
 
     public override void TriggerEvent(WorldEntity invoker)
@@ -33,4 +33,8 @@ public class InvokeQuestEvent : QuestEvent
         (Target as InteractableCharacter).DeactivateQuestMark();
     }
 
+    public override bool CanProgressQuest()
+    {
+        return true;    // No condition to progress quest
+    }
 }

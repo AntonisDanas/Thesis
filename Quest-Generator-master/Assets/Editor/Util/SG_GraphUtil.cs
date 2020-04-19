@@ -60,12 +60,16 @@ public static class SG_GraphUtil
     {
         if (graph == null) return;
 
+        int nodeCount = graph.Nodes.Count;
+
         SG_SpaceNode curNode = null;
         curNode = ScriptableObject.CreateInstance<SG_SpaceNode>();
 
         if (curNode == null) return;
 
         curNode.InitNode(nodeName);
+        curNode.Index = nodeCount + 1;
+        curNode.NodeName = nodeName;
         curNode.Labels = labels;
         curNode.name = "n_" + nodeName.Replace(" ", "");
         curNode.NodeRect.x = mousePos.x;

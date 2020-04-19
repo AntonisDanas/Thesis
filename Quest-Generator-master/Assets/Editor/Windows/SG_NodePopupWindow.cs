@@ -51,7 +51,7 @@ public class SG_NodePopupWindow : EditorWindow
             GUILayout.BeginHorizontal();
 
             labels[i] = EditorGUILayout.TextField("Label " + (i + 1) + ":", labels[i]);
-            Debug.Log(labels[i]);
+            //Debug.Log(labels[i]);
             if (GUILayout.Button("+", GUILayout.Width(20), GUILayout.Height(20)))
             {
                 labels.Add("");
@@ -98,8 +98,6 @@ public class SG_NodePopupWindow : EditorWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
     }
-
-    
 
     private bool CheckIfLabelsAreValid()
     {

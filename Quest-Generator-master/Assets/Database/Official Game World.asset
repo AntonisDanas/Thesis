@@ -1,0 +1,702 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8874412728111178851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FilthyPhilDislikesBraveDave
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -4051846379850675560}
+  EndNode: {fileID: 5271221475678497181}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-7066263458500060607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_SmellySally
+  m_EditorClassIdentifier: 
+  Index: 4
+  NodeName: Smelly Sally
+  NodeRect:
+    serializedVersion: 2
+    x: 657
+    y: 342
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &-6866136766258270044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmugSmithDislikesRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 3020643868456559445}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-6122984398095657223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RegalRegisMarriedFancyFanny
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -5802295304597345699}
+  EndNode: {fileID: -25569304730784981}
+  Label: Married
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-5802295304597345699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_RegalRegis
+  m_EditorClassIdentifier: 
+  Index: 1
+  NodeName: Regal Regis
+  NodeRect:
+    serializedVersion: 2
+    x: 499
+    y: 84
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &-5373974489651728896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RichRitchieDislikesSmugSmith
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -557561185720209685}
+  EndNode: {fileID: 3020643868456559445}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-4394161107905878433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_BraveDaveLikesRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 5271221475678497181}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-4051846379850675560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_FilthyPhil
+  m_EditorClassIdentifier: 
+  Index: 5
+  NodeName: Filthy Phil
+  NodeRect:
+    serializedVersion: 2
+    x: 815
+    y: 471
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &-3235488008594390208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_BraveDaveDislikesSmugSmith
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 5271221475678497181}
+  EndNode: {fileID: 3020643868456559445}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-2894392198547154312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FilthyPhilLikesSlyFry
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -4051846379850675560}
+  EndNode: {fileID: 4384879415578201562}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-2213946328210511867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmugSmithDislikesBraveDave
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 3020643868456559445}
+  EndNode: {fileID: 5271221475678497181}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-2178452737643171040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SlyFryLovesSmellySally
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 4384879415578201562}
+  EndNode: {fileID: -7066263458500060607}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-2167860692510668131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FancyFannyMarriedRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -25569304730784981}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Married
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-1428611346023062620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmellySallyLovesFilthyPhil
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -7066263458500060607}
+  EndNode: {fileID: -4051846379850675560}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-1039216871047415320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RegalRegisHatesFancyFanny
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -5802295304597345699}
+  EndNode: {fileID: -25569304730784981}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-1008609539410720515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Player
+  m_EditorClassIdentifier: 
+  Index: 9
+  NodeName: Player
+  NodeRect:
+    serializedVersion: 2
+    x: 296
+    y: 517
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - Player
+--- !u!114 &-557561185720209685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_RichRitchie
+  m_EditorClassIdentifier: 
+  Index: 2
+  NodeName: Rich Ritchie
+  NodeRect:
+    serializedVersion: 2
+    x: 671
+    y: 212
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &-68164664733073896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RegalRegisLikesBraveDave
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -5802295304597345699}
+  EndNode: {fileID: 5271221475678497181}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &-25569304730784981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_FancyFanny
+  m_EditorClassIdentifier: 
+  Index: 6
+  NodeName: Fancy Fanny
+  NodeRect:
+    serializedVersion: 2
+    x: 252
+    y: 189
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824861efc8e212340ac7523f3087fe90, type: 3}
+  m_Name: Official Game World
+  m_EditorClassIdentifier: 
+  GraphName: Official Game World
+  Nodes:
+  - {fileID: -5802295304597345699}
+  - {fileID: -557561185720209685}
+  - {fileID: 4384879415578201562}
+  - {fileID: -7066263458500060607}
+  - {fileID: -4051846379850675560}
+  - {fileID: -25569304730784981}
+  - {fileID: 3020643868456559445}
+  - {fileID: 5271221475678497181}
+  - {fileID: -1008609539410720515}
+  Edges:
+  - {fileID: 8994581087806754334}
+  - {fileID: 4810406372141296233}
+  - {fileID: 5588618360967620881}
+  - {fileID: 5233763112396003594}
+  - {fileID: 7547107132425485022}
+  - {fileID: -2178452737643171040}
+  - {fileID: 6226790108157664139}
+  - {fileID: -1428611346023062620}
+  - {fileID: -2894392198547154312}
+  - {fileID: 6779477751594461340}
+  - {fileID: 2280847106369910622}
+  - {fileID: 6229285066571831945}
+  - {fileID: 3121421400254938287}
+  - {fileID: -8874412728111178851}
+  - {fileID: -4394161107905878433}
+  - {fileID: -68164664733073896}
+  - {fileID: -2213946328210511867}
+  - {fileID: -3235488008594390208}
+  - {fileID: 7072023618318906230}
+  - {fileID: 4328512308403043703}
+  - {fileID: 5086544518914095128}
+  - {fileID: -1039216871047415320}
+  - {fileID: 2543735562164317420}
+  - {fileID: -6866136766258270044}
+  - {fileID: -5373974489651728896}
+  - {fileID: -2167860692510668131}
+  - {fileID: -6122984398095657223}
+  InTransition: 0
+--- !u!114 &2280847106369910622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FilthyPhilHatesRichRitchie
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -4051846379850675560}
+  EndNode: {fileID: -557561185720209685}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &2543735562164317420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RegalRegisDislikesSmugSmith
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -5802295304597345699}
+  EndNode: {fileID: 3020643868456559445}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &3020643868456559445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_SmugSmith
+  m_EditorClassIdentifier: 
+  Index: 7
+  NodeName: Smug Smith
+  NodeRect:
+    serializedVersion: 2
+    x: 311
+    y: 313
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &3121421400254938287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmellySallyHatesRichRitchie
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -7066263458500060607}
+  EndNode: {fileID: -557561185720209685}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &4328512308403043703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FancyFannyLovesSmugSmith
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -25569304730784981}
+  EndNode: {fileID: 3020643868456559445}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &4384879415578201562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_SlyFry
+  m_EditorClassIdentifier: 
+  Index: 3
+  NodeName: Sly Fry
+  NodeRect:
+    serializedVersion: 2
+    x: 878
+    y: 245
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &4810406372141296233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RichRitchieLikesRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -557561185720209685}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &5086544518914095128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FancyFannyHatesRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -25569304730784981}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &5233763112396003594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RichRitchieHatesSlyFry
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -557561185720209685}
+  EndNode: {fileID: 4384879415578201562}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &5271221475678497181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_BraveDave
+  m_EditorClassIdentifier: 
+  Index: 8
+  NodeName: Brave Dave
+  NodeRect:
+    serializedVersion: 2
+    x: 501
+    y: 512
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Labels:
+  - NPC
+--- !u!114 &5588618360967620881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SlyFryHatesRichRitchie
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 4384879415578201562}
+  EndNode: {fileID: -557561185720209685}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &6226790108157664139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_FilthyPhilLovesSmellySally
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -4051846379850675560}
+  EndNode: {fileID: -7066263458500060607}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &6229285066571831945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmellySallyHatesRegalRegis
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -7066263458500060607}
+  EndNode: {fileID: -5802295304597345699}
+  Label: Hates
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &6779477751594461340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SlyFryDislikesFilthyPhil
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 4384879415578201562}
+  EndNode: {fileID: -4051846379850675560}
+  Label: Dislikes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &7072023618318906230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmugSmithLovesFancyFanny
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 3020643868456559445}
+  EndNode: {fileID: -25569304730784981}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &7547107132425485022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_SmellySallyLovesSlyFry
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -7066263458500060607}
+  EndNode: {fileID: 4384879415578201562}
+  Label: Loves
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &8994581087806754334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_RegalRegisLikesRichRitchie
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -5802295304597345699}
+  EndNode: {fileID: -557561185720209685}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}

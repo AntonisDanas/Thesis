@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class EntityEventBroker
 {
@@ -9,6 +10,12 @@ public class EntityEventBroker
     /// param2: Recepient
     /// </summary>
     public static event Action<WorldEntity, WorldEntity> OnEntityDeath;
+
+    /// <summary>
+    /// param1: Invoker
+    /// param2: Enemy Entity
+    /// </summary>
+    public static event Action<WorldEntity, InteractableEnemy> OnEnemyKilled;
 
     /// <summary>
     /// param1: Entity to be enrolled
@@ -40,12 +47,27 @@ public class EntityEventBroker
     /// </summary>
     public static event Action<Quest> OnQuestCompleted;
 
+    /// <summary>
+    /// param1: Indexes of Characters to be udpated
+    /// param2: Recepient
+    /// </summary>
+    public static event Action<Dictionary<int, CharacterStatus>> OnCharactersStatusUpdate;
+
+    public static event Action<Action<string>> OnCustomQuestEventReactionSent;
+
+    public static event Action<InteractableCharacter, InteractableObject> OnObjectTransfer;
+
     #endregion
 
     #region Publisher Events
     public static void EntityDeath(WorldEntity invoker, WorldEntity recepient)
     {
         OnEntityDeath?.Invoke(invoker, recepient);
+    }
+
+    public static void EnemyKilled(WorldEntity invoker, InteractableEnemy enemy)
+    {
+        OnEnemyKilled?.Invoke(invoker, enemy);
     }
 
     public static void EnrollEntity(WorldEntity entity)
@@ -80,10 +102,25 @@ public class EntityEventBroker
         OnQuestCompleted?.Invoke(quest);
     }
 
+    public static void CharacterStatusChanged(Dictionary<int, CharacterStatus> changedCharacters)
+    {
+        OnCharactersStatusUpdate?.Invoke(changedCharacters);
+    }
+
+    public static void SendCustomQuestEventReaction(Action<string> test)
+    {
+        OnCustomQuestEventReactionSent?.Invoke(test);
+    }
+
+    public static void TransferObject(InteractableCharacter target, InteractableObject obj)
+    {
+        OnObjectTransfer?.Invoke(target, obj);
+    }
+
     #endregion
 
     private static bool CanInvokerPickUpObject()
     {
-        return true;  // TODO check condition to pickup fail
+        return true;  // This could depend on Player's inventory
     }
 }

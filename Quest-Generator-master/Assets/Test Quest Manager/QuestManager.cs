@@ -56,10 +56,19 @@ public class QuestManager
         {
             if (!questEvent.IsActive) continue;
 
-            if (questEvent.Target == entity)
-            {
+            if (questEvent.Target is InteractableObject && 
+                entity is InteractableObject &&
+                (questEvent.Target as InteractableObject).ObjectName == (entity as InteractableObject).ObjectName)
                 return questEvent;
-            }
+
+            if (questEvent.Target is InteractableEnemy &&
+                entity is InteractableEnemy &&
+                (questEvent.Target as InteractableEnemy).EnemyName == (entity as InteractableEnemy).EnemyName)
+                return questEvent;
+
+            if (questEvent.Target == entity)
+                return questEvent;
+            
         }
 
         return null;
@@ -67,6 +76,18 @@ public class QuestManager
 
     public IEnumerator ProgressQuest(WorldEntity invoker, QuestEvent questEvent)
     {
+        yield return null; // hold for progressing for one frame
+
+        int progressCounter = 0;
+        while (questEvent.IsProgressing && progressCounter < 100)
+        {
+            yield return null;
+            progressCounter++;
+        }
+
+        if (!questEvent.CanProgressQuest())
+            yield break;
+
         var quest = questEvent.Quest;
         quest.QuestEventCompleted();
 

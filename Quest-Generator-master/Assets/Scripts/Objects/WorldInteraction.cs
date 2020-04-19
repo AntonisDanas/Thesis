@@ -46,10 +46,17 @@ public class WorldInteraction : MonoBehaviour
                 i.InvokeQuest();
             else if (i.CanCompleteQuest())
                 i.CompleteQuest();
-            //print("Character has Quest");
-            else
-                i.KillCharacter(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
-                //i.Interact(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
+
+            //else
+            //    i.KillCharacter(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
+        }
+        else if (interactable != null && interactable is InteractableObject)
+        {
+            interactable.Interact(null);
+        }
+        else if (interactable != null && interactable is InteractableEnemy)
+        {
+            interactable.Interact(null);
         }
     }
 
@@ -63,6 +70,15 @@ public class WorldInteraction : MonoBehaviour
         foreach (var hit in hits)
         {
             InteractableObject obj = hit.collider.gameObject.GetComponent<InteractableObject>();
+            if (obj != null)
+            {
+                return obj as Interactable;
+            }
+        }
+
+        foreach (var hit in hits)
+        {
+            InteractableEnemy obj = hit.collider.gameObject.GetComponent<InteractableEnemy>();
             if (obj != null)
             {
                 return obj as Interactable;
