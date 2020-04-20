@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class WorldInteraction : MonoBehaviour
 {
-
+    InteractableCharacter player;
     void Start()
     {
         //EntityEventBroker.OnObjectPickUpSuccess += GetObjInter;
         EntityEventBroker.OnObjectPickUpFail += GetObjInterFail;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>();
 
         //EntityEventBroker.OnCharacterInteract += GetCharInter;
     }
@@ -42,13 +43,8 @@ public class WorldInteraction : MonoBehaviour
         if (interactable != null && interactable is InteractableCharacter)
         {
             var i = interactable as InteractableCharacter;
-            if (i.HasQuestAvailable())
-                i.InvokeQuest();
-            else if (i.CanCompleteQuest())
-                i.CompleteQuest();
-
-            //else
-            //    i.KillCharacter(GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>());
+            
+            i.TriggerQuestEvent(player);
         }
         else if (interactable != null && interactable is InteractableObject)
         {

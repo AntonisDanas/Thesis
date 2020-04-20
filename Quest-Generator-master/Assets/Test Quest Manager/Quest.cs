@@ -37,7 +37,7 @@ public class Quest
 
         InteractableCharacter target = QuestEvents[0].Target as InteractableCharacter;
 
-        target.AddInvokeQuestEvent(QuestEvents[0] as InvokeQuestEvent);
+        target.AddQuestEvent(QuestEvents[0] as InvokeQuestEvent);
 
         m_isInit = true;
 
@@ -59,19 +59,21 @@ public class Quest
 
         InteractableCharacter target = QuestEvents[QuestEvents.Count - 1].Target as InteractableCharacter;
 
-        target.AddCompleteQuestEvent(QuestEvents[QuestEvents.Count - 1] as CompleteQuestEvent);
+        target.AddQuestEvent(QuestEvents[QuestEvents.Count - 1] as CompleteQuestEvent);
     }
 
     public void QuestEventCompleted()
     {
         m_activeEvent.SetInactive();
-        //if (m_nextEvent == null)
-        //{
-        //    CompleteQuest();
-        //    return;
-        //}
 
         m_nextEvent.SetActive(this);
+        if (m_nextEvent.Target is InteractableCharacter)
+        {
+            InteractableCharacter ic = m_nextEvent.Target as InteractableCharacter;
+            ic.AddQuestEvent(m_nextEvent);
+        }
+            
+
         m_activeEvent = m_nextEvent;
         m_questEventCounter++;
 

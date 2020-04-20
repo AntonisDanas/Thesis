@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class QuestManager
 {
-    //public static bool CanAddQuest { get; private set; }
-
     private QuestScheduler m_questScheduler;
 
     private List<Quest> m_pendingQuests;
@@ -16,7 +14,6 @@ public class QuestManager
     public QuestManager(QuestScheduler qs)
     {
         m_questScheduler = qs;
-        //CanAddQuest = true;
         m_pendingQuests = new List<Quest>();
         m_activeQuests = new List<Quest>();
         m_questEvents = new List<QuestEvent>();
@@ -93,4 +90,10 @@ public class QuestManager
 
         yield return null;
     }
+
+    public int GetQuestCount()
+    {
+        return m_pendingQuests.Count + m_activeQuests.Count;
+    }
+
 }

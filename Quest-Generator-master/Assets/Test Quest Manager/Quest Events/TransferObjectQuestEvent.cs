@@ -24,7 +24,9 @@ public class TransferObjectQuestEvent : QuestEvent
 
     public override void TriggerEvent(WorldEntity invoker)
     {
-        //TODO
+        //TODO check if player has object
+        EntityEventBroker.TransferObject(Target as InteractableCharacter, m_objectToTransfer);
+        Quest.QuestEventCompleted();
     }
 
     public override void SetInactive()
@@ -35,9 +37,6 @@ public class TransferObjectQuestEvent : QuestEvent
 
     public override bool CanProgressQuest()
     {
-        //TODO check if player has object
-
-        EntityEventBroker.TransferObject(Target as InteractableCharacter, m_objectToTransfer);
         return true;    
     }
 }

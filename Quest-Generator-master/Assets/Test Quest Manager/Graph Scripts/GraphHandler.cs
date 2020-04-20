@@ -205,9 +205,15 @@ public class GraphHandler : MonoBehaviour
         return m_graph.GetPlayerVertex() != null ? m_graph.GetPlayerVertex().GetIndex() : -1;
     }
 
+    public float GetRuleCost(Rule r)
+    {
+        return r.GetAverageCost(m_graph);
+    }
+
     private void ObjectPickedUp(WorldEntity entity, InteractableObject obj)
     {
         if (!IsObjectOwned(obj))
+            return;
 
         Debug.Log(obj.ObjectName + " is stolen by Player");
 
@@ -223,6 +229,7 @@ public class GraphHandler : MonoBehaviour
         Vertex owner = m_graph.GetVertex(objOwnerIndex);
 
         m_graph.DeleteRelation(objOwnerIndex + "-" + objIndex, "Owns");
+        m_graph.DeleteRelation(objOwnerIndex + "-" + playerIndex);
         m_graph.SetRelation(playerIndex, objIndex, "Owns", "Stolen");
         m_graph.SetRelation(objOwnerIndex, playerIndex, "Dislikes", "Stolen " + obj.ObjectName);
 
@@ -245,29 +252,22 @@ public class GraphHandler : MonoBehaviour
         Debug.Log(obj.ObjectName + " is transfered");
 
         Dictionary<int, CharacterStatus> result = new Dictionary<int, CharacterStatus>();
-        CharacterStatus playerStatus = new CharacterStatus();
-        CharacterStatus ownerStatus = new CharacterStatus();
+        CharacterStatus newOwnerStatus = new CharacterStatus();
 
         int objIndex = obj.GetIndexOfGraphInstance();
         int targetIndex = target.GetIndexOfGraphInstance();
-        int objOwnerIndex = m_graph.GetIncomingVerticesByRelationLabel(m_graph.GetVertex(objIndex), "Owns")[0].GetIndex();
+        int playerIndex = m_graph.GetIncomingVerticesByRelationLabel(m_graph.GetVertex(objIndex), "Owns")[0].GetIndex();
 
-        Vertex player = m_graph.GetVertex(objOwnerIndex);
-        Vertex owner = m_graph.GetVertex(targetIndex);
+        Vertex newOwner = m_graph.GetVertex(targetIndex);
 
-        m_graph.DeleteRelation(objOwnerIndex + "-" + objIndex, "Owns");
+        m_graph.DeleteRelation(playerIndex + "-" + objIndex, "Owns");
         m_graph.SetRelation(targetIndex, objIndex, "Owns");
 
-        playerStatus.Label = player.GetLabel();
-        playerStatus.Attributes = player.GetAttributes();
-        playerStatus.OutgoingRelationships = GetAllOutgoingRelationships(objOwnerIndex);
+        newOwnerStatus.Label = newOwner.GetLabel();
+        newOwnerStatus.Attributes = newOwner.GetAttributes();
+        newOwnerStatus.OutgoingRelationships = GetAllOutgoingRelationships(targetIndex);
 
-        ownerStatus.Label = owner.GetLabel();
-        ownerStatus.Attributes = owner.GetAttributes();
-        ownerStatus.OutgoingRelationships = GetAllOutgoingRelationships(objOwnerIndex);
-
-        result.Add(objOwnerIndex, playerStatus);
-        result.Add(targetIndex, ownerStatus);
+        result.Add(targetIndex, newOwnerStatus);
 
         EntityEventBroker.CharacterStatusChanged(result);
     }

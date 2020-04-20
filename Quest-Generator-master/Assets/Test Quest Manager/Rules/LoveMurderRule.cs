@@ -12,11 +12,11 @@ using UnityEngine;
 
 public class LoveMurderRule : Rule
 {
-    public string RuleName { get; private set; }
 
     public LoveMurderRule()
     {
-        RuleName = "Love Murder";
+        ruleName = "Love Murder";
+        RuleMultiplier = 0.8f;
     }
 
     public override List<Graph> ImplementRule(Graph graph)
@@ -41,14 +41,14 @@ public class LoveMurderRule : Rule
             if (n2Connections.Count != 1)
                 continue;
 
-            Vertex hosbantOfn2 = n2Connections[0];
+            Vertex husbantOfn2 = n2Connections[0];
 
             Graph tempGraph = new Graph();
             tempGraph.AddVertex(loverOfn2);
             tempGraph.AddVertex(n2);
-            tempGraph.AddVertex(hosbantOfn2);
+            tempGraph.AddVertex(husbantOfn2);
             tempGraph.SetRelation(n2, loverOfn2, "Loves");
-            tempGraph.SetRelation(n2, hosbantOfn2, "Hates");
+            tempGraph.SetRelation(n2, husbantOfn2, "Hates");
             returnGraph.Add(tempGraph);
         }
 
@@ -90,4 +90,17 @@ public class LoveMurderRule : Rule
         return loveMurder;
     }
 
+    public override float GetAverageCost(Graph graph)
+    {
+        var results = ImplementRule(graph);
+        float cost = 0f;
+
+        foreach (var result in results)
+        {
+            Vertex husbant = graph.GetVertexAtPosition(2);
+            cost += graph.GetIncomingVerticesByRelationLabels(husbant, new List<string>() { "Hates", "Dislikes", "Likes", "Loves" }, Condition.OR).Count;
+        }
+
+        return cost;
+    }
 }

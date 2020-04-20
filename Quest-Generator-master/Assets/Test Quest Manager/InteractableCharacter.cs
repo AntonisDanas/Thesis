@@ -12,8 +12,7 @@ public class InteractableCharacter : Interactable
     [SerializeField] private string m_characterName;
     [SerializeField] private GameObject m_questMarkPlaceholder;
 
-    private InvokeQuestEvent m_invokeQuestRef;
-    private CompleteQuestEvent m_completeQuestRef;
+    private QuestEvent m_currentQuestEvent;
 
     protected override void Start()
     {
@@ -47,17 +46,25 @@ public class InteractableCharacter : Interactable
 
     public bool HasQuestAvailable()
     {
-        if (m_invokeQuestRef == null) return false;
+        if (m_currentQuestEvent == null || 
+            !(m_currentQuestEvent is InvokeQuestEvent) ||
+            ((m_currentQuestEvent is InvokeQuestEvent) && !m_currentQuestEvent.IsActive)) // InvokeQuestEvent should be active if it has a quest ready
+            return false;
 
         return true;
     }
 
-    public bool CanCompleteQuest()
+    public void AddQuestEvent(QuestEvent qe)
     {
-        if (m_completeQuestRef == null || m_invokeQuestRef != null) return false;
-        if (!m_completeQuestRef.IsActive) return false;
+        m_currentQuestEvent = qe;
+    }
 
-        return true;
+    public void TriggerQuestEvent(WorldEntity invoker)
+    {
+        if (m_currentQuestEvent == null || !m_currentQuestEvent.IsActive)
+            return;
+
+        m_currentQuestEvent.TriggerEvent(invoker);
     }
 
     public void ActivateQuestMark()
@@ -70,34 +77,9 @@ public class InteractableCharacter : Interactable
         m_questMarkPlaceholder.SetActive(false);
     }
 
-    public void AddInvokeQuestEvent(InvokeQuestEvent invokeQuestEvent)
-    {
-        m_invokeQuestRef = invokeQuestEvent;
-    }
-
-    public void AddCompleteQuestEvent(CompleteQuestEvent completeQuestEvent)
-    {
-        m_completeQuestRef = completeQuestEvent;
-    }
-
     public override void Interact(WorldEntity invoker)
     {
         EntityEventBroker.InteractWithCharacter(invoker, this);
-    }
-
-    public void InvokeQuest()
-    {
-        if (m_invokeQuestRef == null) return;
-
-        m_invokeQuestRef.TriggerEvent(this);
-        m_invokeQuestRef = null;
-    }
-
-    public void CompleteQuest()
-    {
-        if (m_completeQuestRef == null) return;
-        m_completeQuestRef.TriggerEvent(this);
-        m_completeQuestRef = null;
     }
 
     public void KillCharacter(WorldEntity attacker)

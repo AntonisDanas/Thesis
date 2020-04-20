@@ -7,20 +7,38 @@ public class QuestGenerator
 {
     private QuestScheduler m_questScheduler;
     private GraphHandler m_graphHandler;
+    private int m_questPoolSize;
+    private float m_questPoolGenerationMultiplier;
+    private float m_ruleCostMultiplier;
+    private float m_ruleCountMultiplier;
+
     private List<InteractableCharacter> m_interactableCharacters;
     private List<InteractableObject> m_interactableObjects;
     private List<InteractableEnemy> m_interactableEnemies;
 
+    private Dictionary<string, Rule> m_availableRules;
+    private Dictionary<string, int> m_ruleOccurenceCount;
 
-    public QuestGenerator(QuestScheduler qs, GraphHandler gh)
+
+    public QuestGenerator(QuestScheduler qs, GraphHandler gh, int qps, float qpgm, float costM, float countM)
     {
         m_questScheduler = qs;
         m_graphHandler = gh;
+        m_questPoolSize = qps;
+        m_questPoolGenerationMultiplier = qpgm;
+        m_ruleCostMultiplier = costM;
+        m_ruleCountMultiplier = countM;
+
         m_interactableCharacters = new List<InteractableCharacter>();
         m_interactableObjects = new List<InteractableObject>();
         m_interactableEnemies = new List<InteractableEnemy>();
 
+        m_availableRules = new Dictionary<string, Rule>();
+        m_ruleOccurenceCount = new Dictionary<string, int>();
+
         EntityEventBroker.OnEntityEnroll += EnrollEntity;
+
+        InstantiateRules();
     }
 
     public IEnumerator GenerateNewQuest()
@@ -28,9 +46,27 @@ public class QuestGenerator
         if (m_graphHandler == null)
             m_questScheduler.GetGraphHandler();
 
+        // Create Quest depending on Quest Pool Size
+        float randomNum = UnityEngine.Random.Range(0f, m_questPoolSize);
+        randomNum *= m_questPoolGenerationMultiplier;
+        int currentQuestCount = m_questScheduler.GetQuestCount();
+
+        if (randomNum < currentQuestCount)
+        {
+            Debug.Log("Cannot create Quest because of pool size");
+            m_questScheduler.QuestGenerated(null);
+            yield break;
+        }
 
         // Choose Best Rule
-        StealRule r = new StealRule();
+        Rule r = ChooseBestRule();
+
+        if (r == null)
+        {
+            Debug.Log("No best rule available");
+            m_questScheduler.QuestGenerated(null);
+            yield break;
+        }
 
         // Search world graph to apply rule
         // If no match found find other rule
@@ -48,24 +84,20 @@ public class QuestGenerator
         //1) Check if character already has quest (create new graph list)
         if (!CheckIfCharactersHaveQuest(ref returnGraphs, m_interactableCharacters))
         {
-            // All characters have quests
-
             Debug.Log("All available characters have a Quest");
             m_questScheduler.QuestGenerated(null);
             yield break;
         }
 
         //2) Rearrange list according to relationship with Player
-        //Graph final = ReturnPatternAccordingToRelationship(returnGraphs);
-        Graph final = returnGraphs[0];
+        Graph final = ReturnPatternAccordingToRelationship(returnGraphs);
 
-        //if (final == null)
-        //{
-        //    // Characters could not give quest
-
-        //    m_questScheduler.QuestGenerated(null);
-        //    yield break;
-        //}
+        if (final == null)
+        {
+            Debug.Log("Characters could not give quest");
+            m_questScheduler.QuestGenerated(null);
+            yield break;
+        }
 
         //3) Generate quest (implement inside Rule)
         Quest quest = r.GenerateQuestFromRule(final, m_interactableCharacters, m_interactableObjects, m_interactableEnemies);
@@ -73,6 +105,18 @@ public class QuestGenerator
         // Send quest to QuestScheduler
         m_questScheduler.QuestGenerated(quest);
         yield return null;
+    }
+
+    private void InstantiateRules()
+    {
+        Rule steal = new StealRule();
+        Rule loveMurder = new LoveMurderRule();
+
+        m_availableRules.Add(steal.GetRuleName(), steal);
+        m_ruleOccurenceCount.Add(steal.GetRuleName(), 0);
+
+        m_availableRules.Add(loveMurder.GetRuleName(), loveMurder);
+        m_ruleOccurenceCount.Add(loveMurder.GetRuleName(), 0);
     }
 
     private void EnrollEntity(WorldEntity entity)
@@ -83,6 +127,32 @@ public class QuestGenerator
             m_interactableObjects.Add(entity as InteractableObject);
         else if (entity is InteractableEnemy)
             m_interactableEnemies.Add(entity as InteractableEnemy);
+    }
+
+    private Rule ChooseBestRule()
+    {
+        float thres = 0f;
+
+        Rule selectedRule = null;
+
+        foreach (var rule in m_availableRules)
+        {
+            float temp = m_graphHandler.GetRuleCost(rule.Value);
+
+            float cost = temp == 0 ? 0 : 1 / temp;
+            int count = m_ruleOccurenceCount[rule.Key] == 0 ? 0 : 1 / m_ruleOccurenceCount[rule.Key];
+            float multiplier = rule.Value.RuleMultiplier;
+
+            float fri = (m_ruleCostMultiplier * cost + m_ruleCountMultiplier * count) * multiplier;
+            fri *= UnityEngine.Random.Range(0f, 1f); // just a random variable
+
+            if (fri > thres)
+                selectedRule = rule.Value;
+        }
+
+        Debug.Log("Rule Chosen: " + selectedRule.GetRuleName());
+
+        return selectedRule;
     }
 
     private bool CheckIfCharactersHaveQuest(ref List<Graph> returnGraphs, List<InteractableCharacter> characters)
@@ -120,8 +190,6 @@ public class QuestGenerator
         {
             int targetIndex = item.GetVertexAtPosition(0).GetIndex();
             string relationship = m_graphHandler.GetRelationshipLabelBetweenNodes(targetIndex, playerIndex);
-
-            Debug.Log(relationship);
 
             if (relationship == "")
                 continue;

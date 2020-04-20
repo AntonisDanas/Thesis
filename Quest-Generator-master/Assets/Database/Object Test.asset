@@ -17,13 +17,29 @@ MonoBehaviour:
   NodeRect:
     serializedVersion: 2
     x: 300
-    y: 506
+    y: 507
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
   Labels:
   - Resource
+--- !u!114 &-7321827901101664808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_HaterLikesFlower
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -3789263167109809320}
+  EndNode: {fileID: -8193312118541125349}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
 --- !u!114 &-7221923487145406230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +120,22 @@ MonoBehaviour:
   IsSelected: 0
   Labels:
   - NPC
+--- !u!114 &-3065930055207614120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_DislikerNeutralPlayer
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -6227551617335280405}
+  EndNode: {fileID: 8952501150058615589}
+  Label: Neutral
+  ParentGraph: {fileID: 11400000}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +161,77 @@ MonoBehaviour:
   - {fileID: -7221923487145406230}
   - {fileID: -6020574033039579969}
   - {fileID: 7840709145383968915}
+  - {fileID: 509836812759708851}
+  - {fileID: 2422601222082140338}
+  - {fileID: -7321827901101664808}
+  - {fileID: -3065930055207614120}
+  - {fileID: 4766872367582011368}
+  - {fileID: 2754767289759172232}
   InTransition: 0
+--- !u!114 &509836812759708851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_DislikerLikesFlower
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -6227551617335280405}
+  EndNode: {fileID: -8193312118541125349}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &2422601222082140338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_OwnerLikesFlower
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 7768801433575699454}
+  EndNode: {fileID: -8193312118541125349}
+  Label: Likes
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &2754767289759172232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_HaterNeutralPlayer
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -3789263167109809320}
+  EndNode: {fileID: 8952501150058615589}
+  Label: Neutral
+  ParentGraph: {fileID: 11400000}
+--- !u!114 &4766872367582011368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09afaa83a61471d43b8026f98ae34b88, type: 3}
+  m_Name: e_OwnerNeutralPlayer
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: 7768801433575699454}
+  EndNode: {fileID: 8952501150058615589}
+  Label: Neutral
+  ParentGraph: {fileID: 11400000}
 --- !u!114 &5582387527405202022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +248,8 @@ MonoBehaviour:
   NodeName: Sword
   NodeRect:
     serializedVersion: 2
-    x: 475
-    y: 340
+    x: 676
+    y: 80
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
@@ -194,8 +296,8 @@ MonoBehaviour:
   NodeName: Owner
   NodeRect:
     serializedVersion: 2
-    x: 425
-    y: 183
+    x: 432
+    y: 294
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}

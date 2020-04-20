@@ -163,6 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174fe9bc65171f44a9f82868fef71d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinQuestGenerationThreshold: 5
+  MaxQuestGenerationThreshold: 10
+  QuestPoolSize: 2
+  QuestPoolGenerationMultiplier: 1.1
+  RuleCostMultiplier: 0.7
+  RuleCountMultiplier: 0.3
 --- !u!1 &1632703777
 GameObject:
   m_ObjectHideFlags: 0

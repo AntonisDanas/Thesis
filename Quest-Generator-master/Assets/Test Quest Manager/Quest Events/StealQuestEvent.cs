@@ -20,7 +20,7 @@ public class StealQuestEvent : QuestEvent
 
     public override void TriggerEvent(WorldEntity invoker)
     {
-        //TODO
+        //The stealing is handled by the EntityEventBroker
     }
 
     public override void SetInactive()

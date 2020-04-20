@@ -12,11 +12,11 @@ using UnityEngine;
 
 public class StealRule : Rule
 {
-    public string RuleName { get; private set; }
 
     public StealRule()
     {
-        RuleName = "Steal";
+        ruleName = "Steal";
+        RuleMultiplier = 1.1f;
     }
 
     public override List<Graph> ImplementRule(Graph graph)
@@ -100,5 +100,11 @@ public class StealRule : Rule
         steal.AddQuestEvent(cq);
 
         return steal;
+    }
+
+    public override float GetAverageCost(Graph graph)
+    {
+        // Everytime 1 person will dislike the thief
+        return 1f;
     }
 }

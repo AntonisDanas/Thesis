@@ -78,4 +78,9 @@ public class TestRule : Rule
 
         return testQuest;
     }
+
+    public override float GetAverageCost(Graph graph)
+    {
+        throw new System.NotImplementedException();
+    }
 }

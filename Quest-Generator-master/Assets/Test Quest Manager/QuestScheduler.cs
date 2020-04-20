@@ -5,19 +5,35 @@ using UnityEngine;
 
 public class QuestScheduler : MonoBehaviour
 {
+    public float MinQuestGenerationThreshold;
+    public float MaxQuestGenerationThreshold;
+    public int QuestPoolSize;
+    public float QuestPoolGenerationMultiplier;
+    public float RuleCostMultiplier;
+    public float RuleCountMultiplier;
+
     private QuestManager m_questManager;
     private QuestGenerator m_questGenerator;
     private Graph m_graph;
 
-    //for debug purposes
-    //[SerializeField] private InteractableCharacter invoker;
+    private float m_timePassed;
+    private float m_timeGoal;
 
-    // Start is called before the first frame update
+
     void Awake()
     {
         m_questManager = new QuestManager(this);
-        m_questGenerator = new QuestGenerator(this, FindObjectOfType<GraphHandler>());
+        m_questGenerator = new QuestGenerator(this, 
+                                    FindObjectOfType<GraphHandler>(), 
+                                    QuestPoolSize,
+                                    QuestPoolGenerationMultiplier,
+                                    RuleCostMultiplier,
+                                    RuleCountMultiplier);
+
         SubscribeToEntityEventBroker();
+
+        m_timePassed = 0f;
+        m_timeGoal = UnityEngine.Random.Range(MinQuestGenerationThreshold, MaxQuestGenerationThreshold);
 
         //for debug purposes
         //PopulateTestQuest();
@@ -38,9 +54,21 @@ public class QuestScheduler : MonoBehaviour
     private void Update()
     {
         // for debug
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    StartCoroutine(m_questGenerator.GenerateNewQuest());
+        //    //PopulateKillEnemiesQuest();
+        //}
+
+        m_timePassed += Time.deltaTime;
+
+        if (m_timePassed > m_timeGoal)
         {
+            Debug.Log("Trying to generate Quest");
             StartCoroutine(m_questGenerator.GenerateNewQuest());
+
+            m_timePassed = 0f;
+            m_timeGoal = UnityEngine.Random.Range(MinQuestGenerationThreshold, MaxQuestGenerationThreshold);
         }
     }
 
@@ -214,6 +242,11 @@ public class QuestScheduler : MonoBehaviour
         return FindObjectOfType<GraphHandler>();
     }
 
+    public int GetQuestCount()
+    {
+        return m_questManager.GetQuestCount();
+    }
+
     public void WorldEntityDied(WorldEntity invoker, WorldEntity target)
     {
         //Check if target was part of a Quest
@@ -246,6 +279,9 @@ public class QuestScheduler : MonoBehaviour
     {
         Debug.Log("Quest Completed");
         m_questManager.CompleteQuest(quest);
+
+        // When a Quest is completed try and generate a new one
+        m_timePassed = m_timeGoal;
     }
 
     public void QuestGenerated(Quest quest)

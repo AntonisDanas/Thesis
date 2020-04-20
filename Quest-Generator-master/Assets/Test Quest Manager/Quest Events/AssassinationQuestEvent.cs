@@ -22,7 +22,7 @@ public class AssassinationQuestEvent : QuestEvent
 
     public override void TriggerEvent(WorldEntity invoker)
     {
-        //TODO
+        // The kill is handled by the EntityEventBroker
     }
 
     public override void SetInactive()
