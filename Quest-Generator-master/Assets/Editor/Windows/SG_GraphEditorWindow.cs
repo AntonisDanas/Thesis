@@ -39,14 +39,23 @@ public class SG_GraphEditorWindow : EditorWindow
             return;
         }
 
-        Event e = Event.current;
-        ProcessEvents(e);
+        
 
-        workView.UpdateView(position, new Rect(0f, 0f, ViewPercentage, 1f), e, curGraph);
+        workView.UpdateView(position, new Rect(0f, 0f, ViewPercentage, 1f), curGraph);
         propertyView.UpdateView(new Rect(position.width, position.y, position.width, position.height),
-                                new Rect(ViewPercentage, 0f, 1 - ViewPercentage, 1f), e, curGraph);
+                                new Rect(ViewPercentage, 0f, 1 - ViewPercentage, 1f), curGraph);
 
         Repaint(); //Windows keeps repainting even when not in focus
+
+        Event e = Event.current;
+
+        if (e.type == EventType.Layout)
+            return;
+
+        ProcessEvents(e);
+
+        workView.ProcessEvents(e);
+        propertyView.ProcessEvents(e);
     }
 
     private static void CreateViews()

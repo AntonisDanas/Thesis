@@ -19,7 +19,7 @@ public class SG_ViewBase
         GetEditorSkin();
     }
 
-    public virtual void UpdateView(Rect editorRect, Rect percentageRect, Event e, SG_Graph curGraph)
+    public virtual void UpdateView(Rect editorRect, Rect percentageRect, SG_Graph curGraph)
     {
         if (viewSkin ==null)
         {

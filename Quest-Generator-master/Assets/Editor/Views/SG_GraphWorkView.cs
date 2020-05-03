@@ -12,9 +12,9 @@ public class SG_GraphWorkView : SG_ViewBase
 
     public SG_GraphWorkView() : base("Graph Work View") { }
 
-    public override void UpdateView(Rect editorRect, Rect percentageRect, Event e, SG_Graph curGraph)
+    public override void UpdateView(Rect editorRect, Rect percentageRect, SG_Graph curGraph)
     {
-        base.UpdateView(editorRect, percentageRect, e, curGraph);
+        base.UpdateView(editorRect, percentageRect, curGraph);
 
         if (curGraph != null) ViewTitle = curGraph.GraphName;
         else ViewTitle = "No graph";
@@ -25,12 +25,11 @@ public class SG_GraphWorkView : SG_ViewBase
 
         if (curGraph != null)
         {
+            Event e = Event.current;
             curGraph.UpdateGraphGUI(e, editorRect, viewSkin);
         }
         
         GUILayout.EndArea();
-
-        ProcessEvents(e);
     }
 
     public override void ProcessEvents(Event e)
@@ -118,6 +117,7 @@ public class SG_GraphWorkView : SG_ViewBase
         switch (obj.ToString())
         {
             case "DeleteNode":
+                SG_GraphUtil.DeleteNode(curGraph, selectedNode);
                 break;
             case "MakeTransition":
                 CreateTransition();

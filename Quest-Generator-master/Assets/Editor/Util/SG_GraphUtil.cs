@@ -102,4 +102,32 @@ public static class SG_GraphUtil
         AssetDatabase.SaveAssets(); //then saves the edge
         AssetDatabase.Refresh();
     }
+
+    public static void DeleteNode(SG_Graph graph, SG_NodeBase selectedNode)
+    {
+        if (graph == null ||
+            selectedNode == null) return;
+
+        DeleteAllNodeEdges(graph, selectedNode);
+
+        Object.DestroyImmediate(selectedNode, true);
+        AssetDatabase.SaveAssets(); //then saves the edge
+        AssetDatabase.Refresh();
+
+        graph.Nodes.Remove(selectedNode);
+    }
+
+    private static void DeleteAllNodeEdges(SG_Graph graph, SG_NodeBase selectedNode)
+    {
+        List<SG_Edge> edges = graph.GetAllNodeEdges(selectedNode);
+
+        foreach (var edge in edges)
+        {
+            Object.DestroyImmediate(edge, true);
+            AssetDatabase.SaveAssets(); //then saves the edge
+            AssetDatabase.Refresh();
+
+            graph.Edges.Remove(edge);
+        }
+    }
 }

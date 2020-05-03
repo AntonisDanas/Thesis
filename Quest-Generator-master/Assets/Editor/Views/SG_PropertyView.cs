@@ -10,17 +10,15 @@ public class SG_PropertyView : SG_ViewBase
 
     public SG_PropertyView() : base("Property View") { }
 
-    public override void UpdateView(Rect editorRect, Rect percentageRect, Event e, SG_Graph curGraph)
+    public override void UpdateView(Rect editorRect, Rect percentageRect, SG_Graph curGraph)
     {
-        base.UpdateView(editorRect, percentageRect, e, curGraph);
+        base.UpdateView(editorRect, percentageRect, curGraph);
 
         GUI.Box(ViewRect, ViewTitle, viewSkin.GetStyle("PropertyViewBG"));
 
         GUILayout.BeginArea(ViewRect);
         
         GUILayout.EndArea();
-
-        ProcessEvents(e);
     }
 
     public override void ProcessEvents(Event e)

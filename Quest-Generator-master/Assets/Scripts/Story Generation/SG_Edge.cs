@@ -10,7 +10,6 @@ using UnityEditor;
 [Serializable]
 public class SG_Edge : ScriptableObject
 {
-    //public string EdgeName;
     public SG_NodeBase StartNode;
     public SG_NodeBase EndNode;
     public string Label;
@@ -18,7 +17,6 @@ public class SG_Edge : ScriptableObject
 
     public void InitEdge(SG_NodeBase sNode, SG_NodeBase eNode, string label, SG_Graph pGraph)
     {
-        //EdgeName = name;
         StartNode = sNode;
         EndNode = eNode;
         Label = label;

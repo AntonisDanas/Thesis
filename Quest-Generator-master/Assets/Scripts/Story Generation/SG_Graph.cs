@@ -50,6 +50,19 @@ public class SG_Graph : ScriptableObject
         }
     }
 
+    public List<SG_Edge> GetAllNodeEdges(SG_NodeBase selectedNode)
+    {
+        List<SG_Edge> edges = new List<SG_Edge>();
+
+        foreach (var edge in Edges)
+        {
+            if (edge.StartNode == selectedNode || edge.EndNode == selectedNode)
+                edges.Add(edge);
+        }
+
+        return edges;
+    }
+
 #if UNITY_EDITOR
     public void UpdateGraphGUI(Event e, Rect viewRect, GUISkin viewSkin)
     {
