@@ -79,7 +79,7 @@ public class LoveMurderRule : Rule
                 husbant = c;
         }
 
-        var iq = new InvokeQuestEvent(lover);
+        var iq = new InvokeQuestEvent(lover, new QuestEventDescription() { DescriptionLabel = "Please kill " + husbant.CharacterName, ButtonLabel = "Start Quest"});
         var aq = new AssassinationQuestEvent(husbant);
         var cq = new CompleteQuestEvent(lover);
 
@@ -94,13 +94,15 @@ public class LoveMurderRule : Rule
     {
         var results = ImplementRule(graph);
         float cost = 0f;
+        float count = 0f;
 
         foreach (var result in results)
         {
             Vertex husbant = graph.GetVertexAtPosition(2);
             cost += graph.GetIncomingVerticesByRelationLabels(husbant, new List<string>() { "Hates", "Dislikes", "Likes", "Loves" }, Condition.OR).Count;
+            count++;
         }
 
-        return cost;
+        return count == 0 ? 0f : cost / count;
     }
 }

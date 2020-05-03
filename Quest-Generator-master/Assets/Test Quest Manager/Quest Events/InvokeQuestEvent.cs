@@ -10,6 +10,15 @@ public class InvokeQuestEvent : QuestEvent
         Target = target;
         IsActive = false;
         IsProgressing = false;
+        Description = null;
+    }
+
+    public InvokeQuestEvent(InteractableCharacter target, QuestEventDescription description)
+    {
+        Target = target;
+        IsActive = false;
+        IsProgressing = false;
+        Description = description;
     }
 
     public override void TriggerEvent(WorldEntity invoker)
@@ -36,5 +45,10 @@ public class InvokeQuestEvent : QuestEvent
     public override bool CanProgressQuest()
     {
         return true;    // No condition to progress quest
+    }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        return Description;
     }
 }

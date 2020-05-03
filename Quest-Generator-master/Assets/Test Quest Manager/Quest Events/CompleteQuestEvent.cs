@@ -11,6 +11,14 @@ public class CompleteQuestEvent : QuestEvent
         IsProgressing = false;
     }
 
+    public CompleteQuestEvent(WorldEntity target, QuestEventDescription description)
+    {
+        Target = target;
+        IsActive = false;
+        IsProgressing = false;
+        Description = description;
+    }
+
     public override void TriggerEvent(WorldEntity invoker)
     {
         if (!IsActive) return;
@@ -35,5 +43,14 @@ public class CompleteQuestEvent : QuestEvent
     public override bool CanProgressQuest()
     {
         return true;    // No condition to progress quest
+    }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        var des = new QuestEventDescription();
+        des.ButtonLabel = "Complete Quest!";
+        des.DescriptionLabel = "Great! Here's your reward!";
+
+        return des;
     }
 }

@@ -44,14 +44,17 @@ public class InteractableCharacter : Interactable
         return m_graphInstance.Index;
     }
 
-    public bool HasQuestAvailable()
+    public bool HasQuestEvent()
     {
-        if (m_currentQuestEvent == null || 
-            !(m_currentQuestEvent is InvokeQuestEvent) ||
-            ((m_currentQuestEvent is InvokeQuestEvent) && !m_currentQuestEvent.IsActive)) // InvokeQuestEvent should be active if it has a quest ready
+        if (m_currentQuestEvent == null)
             return false;
 
         return true;
+    }
+
+    public QuestEventDescription GetQuestEventDescription()
+    {
+        return m_currentQuestEvent.GetQuestEventDescription();
     }
 
     public void AddQuestEvent(QuestEvent qe)

@@ -11,6 +11,14 @@ public class StealQuestEvent : QuestEvent
         IsProgressing = false;
     }
 
+    public StealQuestEvent(InteractableObject target, QuestEventDescription description)
+    {
+        Target = target;
+        IsActive = false;
+        IsProgressing = false;
+        Description = description;
+    }
+
     public override void SetActive(Quest quest)
     {
         IsActive = true;
@@ -32,5 +40,14 @@ public class StealQuestEvent : QuestEvent
     public override bool CanProgressQuest()
     {
         return true;    // No condition to progress quest
+    }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        var des = new QuestEventDescription();
+        des.ButtonLabel = ""; // no button required
+        des.DescriptionLabel = "Steal " + (Target as InteractableObject).ObjectName;
+
+        return des;
     }
 }

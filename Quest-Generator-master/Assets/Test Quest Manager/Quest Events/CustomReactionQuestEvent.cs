@@ -39,4 +39,9 @@ public class CustomReactionQuestEvent : QuestEvent
     {
         Debug.Log(t);
     }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        throw new System.NotImplementedException();
+    }
 }

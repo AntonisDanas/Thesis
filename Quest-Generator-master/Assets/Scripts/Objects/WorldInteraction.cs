@@ -7,11 +7,9 @@ public class WorldInteraction : MonoBehaviour
     InteractableCharacter player;
     void Start()
     {
-        //EntityEventBroker.OnObjectPickUpSuccess += GetObjInter;
         EntityEventBroker.OnObjectPickUpFail += GetObjInterFail;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<InteractableCharacter>();
 
-        //EntityEventBroker.OnCharacterInteract += GetCharInter;
     }
 
     void GetObjInter(InteractableObject obj)
@@ -25,15 +23,16 @@ public class WorldInteraction : MonoBehaviour
     }
 
 
-    void GetCharInter(InteractableCharacter obj)
-    {
-        print("Interacted with: " + obj.CharacterName);
+    void InteractWithCharacter(WorldEntity invoker, InteractableCharacter character)
+    { 
+        print("Interacted with: " + character.CharacterName);
+        EntityEventBroker.InteractWithCharacter(invoker, character);
     }
 
     // Update is called once per frame
     void Update ()
     {
-		if(Input.GetMouseButtonDown(0))// && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+		if(Input.GetMouseButtonDown(0))
             GetInteraction();
 	}
 
@@ -43,8 +42,8 @@ public class WorldInteraction : MonoBehaviour
         if (interactable != null && interactable is InteractableCharacter)
         {
             var i = interactable as InteractableCharacter;
-            
-            i.TriggerQuestEvent(player);
+            InteractWithCharacter(player, i);
+            //i.TriggerQuestEvent(player);
         }
         else if (interactable != null && interactable is InteractableObject)
         {

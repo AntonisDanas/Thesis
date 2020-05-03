@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class KillEnemiesQuestEvent : QuestEvent
 {
-    private int m_killGoal = 0;
+    private int m_killGoal;
     private int m_currentKills = 0;
 
-    public KillEnemiesQuestEvent(InteractableEnemy target)
+    public KillEnemiesQuestEvent(InteractableEnemy target, int goal)
     {
         Target = target;
         IsActive = false;
         IsProgressing = false;
+        m_killGoal = goal;
+    }
+
+    public KillEnemiesQuestEvent(InteractableEnemy target, int goal, QuestEventDescription description)
+    {
+        Target = target;
+        IsActive = false;
+        IsProgressing = false;
+        Description = description;
+        m_killGoal = goal;
     }
 
     public override void SetActive(Quest quest)
@@ -22,7 +32,6 @@ public class KillEnemiesQuestEvent : QuestEvent
         // Fix how it appears to be on a quest. Maybe a shader
         //(Target as InteractableCharacter).ActivateQuestMark();
 
-        m_killGoal = Random.Range(3, 8);
         m_currentKills = 0;
         Debug.Log("You need to kill " + m_killGoal + " of type " + (Target as InteractableEnemy).EnemyName);
     }
@@ -58,5 +67,14 @@ public class KillEnemiesQuestEvent : QuestEvent
             IsProgressing = true;  // it is some sort of mutex
             TriggerEvent(invoker);
         }
+    }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        var des = new QuestEventDescription();
+        des.DescriptionLabel = "You need to kill " + m_killGoal + " of " + (Target as InteractableEnemy).EnemyName;
+        des.ButtonLabel = ""; // no button needed
+
+        return des;
     }
 }

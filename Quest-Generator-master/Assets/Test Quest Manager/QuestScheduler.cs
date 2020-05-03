@@ -19,7 +19,6 @@ public class QuestScheduler : MonoBehaviour
     private float m_timePassed;
     private float m_timeGoal;
 
-
     void Awake()
     {
         m_questManager = new QuestManager(this);
@@ -179,7 +178,7 @@ public class QuestScheduler : MonoBehaviour
         }
 
         var iq = new InvokeQuestEvent(owner);
-        var gr = new GatherResourcesQuestEvent(obj);
+        var gr = new GatherResourcesQuestEvent(obj, 5);
         var cq = new CompleteQuestEvent(owner);
 
         testQuest.AddQuestEvent(iq);
@@ -218,7 +217,7 @@ public class QuestScheduler : MonoBehaviour
         }
 
         var iq = new InvokeQuestEvent(owner);
-        var ke = new KillEnemiesQuestEvent(enemy);
+        var ke = new KillEnemiesQuestEvent(enemy, 3);
         var cq = new CompleteQuestEvent(owner);
 
         testQuest.AddQuestEvent(iq);

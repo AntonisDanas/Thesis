@@ -234,7 +234,6 @@ public class Graph
         {
             if (v == null)
             {
-                PrintVertices();
                 this.vertices.RemoveAt(currentIndex);
                 tempIndexes.Add(currentIndex);
                 updated = true;
@@ -516,6 +515,9 @@ public class Graph
         {
             if (!edgeKey.Split('-')[1].Equals(vertex.GetIndex().ToString()))
             {
+                if (!this.edges.ContainsKey(edgeKey))
+                    continue;
+
                 List<Edge> edges = this.edges[edgeKey];
 
                 foreach (Edge edge in edges)
@@ -608,6 +610,9 @@ public class Graph
         {
             if (edgeKey.Split('-')[0].Equals(vertex.GetIndex().ToString()))
             {
+                if (!this.edges.ContainsKey(edgeKey))
+                    continue;
+
                 edges.AddRange(this.edges[edgeKey]);
             }
         }
@@ -621,6 +626,9 @@ public class Graph
         {
             if (edgeKey.Split('-')[1].Equals(vertex.GetIndex().ToString()))
             {
+                if (!this.edges.ContainsKey(edgeKey))
+                    continue;
+
                 edges.AddRange(this.edges[edgeKey]);
             }
         }
@@ -632,6 +640,9 @@ public class Graph
         List<Edge> edges = new List<Edge>();
         foreach (string edgeKey in vertex.GetEdgeIndices())
         {
+            if (!this.edges.ContainsKey(edgeKey))
+                continue;
+
             edges.AddRange(this.edges[edgeKey]);               
         }
         return edges;
@@ -644,6 +655,9 @@ public class Graph
         {
             if (edgeKey.Split('-')[0].Equals(vertex.GetIndex().ToString()))
             {
+                if (!this.edges.ContainsKey(edgeKey))
+                    continue;
+
                 edges.Add(edgeKey, this.edges[edgeKey]);
             }
         }
@@ -658,6 +672,9 @@ public class Graph
         {
             if (edgeKey.Split('-')[1].Equals(vertex.GetIndex().ToString()))
             {
+                if (!this.edges.ContainsKey(edgeKey))
+                    continue;
+
                 edges.Add(edgeKey, this.edges[edgeKey]);
             }
         }
@@ -669,40 +686,12 @@ public class Graph
         Dictionary<string, List<Edge>> edges = new Dictionary<string, List<Edge>>();
         foreach (string edgeKey in vertex.GetEdgeIndices())
         {
+            if (!this.edges.ContainsKey(edgeKey))
+                continue;
+
             edges.Add(edgeKey, this.edges[edgeKey]);
         }
         return edges;
-    }
-       
-    public void PrintVertices()
-    {
-        foreach (Vertex vertex in this.vertices)
-        {
-            if (vertex != null) {
-                Console.Write(vertex.GetLabel() + " -> ");
-            }
-                
-        }
-        Console.WriteLine();
-    }
-        
-    public void PrintVerticesAndIndices()
-    {
-        foreach (Vertex vertex in this.vertices)
-        {
-            if (vertex != null)
-            {
-                Console.WriteLine("===");
-                Console.Write("v: " + vertex.GetLabel()+ ", index:"+vertex.GetIndex() + " -> ");
-                foreach(string s in vertex.GetEdgeIndices())
-                {
-                    Console.Write("edges: " + s + "->");
-                }
-                Console.WriteLine("===");
-            }
-
-        }
-        Console.WriteLine();
     }
 
     private int binarySearchCount(List<int> list, int element)

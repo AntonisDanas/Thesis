@@ -89,7 +89,7 @@ public class StealRule : Rule
             }
         }
 
-        var iq = new InvokeQuestEvent(enemy);
+        var iq = new InvokeQuestEvent(enemy, new QuestEventDescription() { DescriptionLabel = "Can you steal " + obj.ObjectName + " from " + n2.CharacterName, ButtonLabel = "Start Quest" });
         var sq = new StealQuestEvent(obj);
         var tq = new TransferObjectQuestEvent(enemy, obj);
         var cq = new CompleteQuestEvent(enemy);

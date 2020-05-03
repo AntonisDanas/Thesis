@@ -13,6 +13,14 @@ public class AssassinationQuestEvent : QuestEvent
         IsProgressing = false;
     }
 
+    public AssassinationQuestEvent(WorldEntity target, QuestEventDescription description)
+    {
+        Target = target;
+        IsActive = false;
+        IsProgressing = false;
+        Description = description;
+    }
+
     public override void SetActive(Quest quest)
     {
         IsActive = true;
@@ -34,5 +42,14 @@ public class AssassinationQuestEvent : QuestEvent
     public override bool CanProgressQuest()
     {
         return true;    // No condition to progress quest
+    }
+
+    public override QuestEventDescription GetQuestEventDescription()
+    {
+        var des = new QuestEventDescription();
+        des.ButtonLabel = "Kill"; // no button required
+        des.DescriptionLabel = "Kill " + (Target as InteractableCharacter).CharacterName + "?";
+
+        return des;
     }
 }

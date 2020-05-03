@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class QuestEvent
 {
+    public QuestEventDescription Description { get; protected set; }
     public bool IsProgressing { get; protected set; }
     public Quest Quest { get; protected set; }
     public WorldEntity Target { get; protected set; }
@@ -12,4 +13,5 @@ public abstract class QuestEvent
     public abstract void SetActive(Quest quest);
     public abstract void SetInactive();
     public abstract bool CanProgressQuest();
+    public abstract QuestEventDescription GetQuestEventDescription();
 }

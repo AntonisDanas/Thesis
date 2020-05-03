@@ -111,12 +111,20 @@ public class QuestGenerator
     {
         Rule steal = new StealRule();
         Rule loveMurder = new LoveMurderRule();
+        Rule resourceGather = new ResourceGatherRule();
+        Rule killEnemy = new EnemyKillRule();
 
         m_availableRules.Add(steal.GetRuleName(), steal);
         m_ruleOccurenceCount.Add(steal.GetRuleName(), 0);
 
         m_availableRules.Add(loveMurder.GetRuleName(), loveMurder);
         m_ruleOccurenceCount.Add(loveMurder.GetRuleName(), 0);
+
+        m_availableRules.Add(resourceGather.GetRuleName(), resourceGather);
+        m_ruleOccurenceCount.Add(resourceGather.GetRuleName(), 0);
+
+        m_availableRules.Add(killEnemy.GetRuleName(), killEnemy);
+        m_ruleOccurenceCount.Add(killEnemy.GetRuleName(), 0);
     }
 
     private void EnrollEntity(WorldEntity entity)
@@ -139,15 +147,18 @@ public class QuestGenerator
         {
             float temp = m_graphHandler.GetRuleCost(rule.Value);
 
-            float cost = temp == 0 ? 0 : 1 / temp;
-            int count = m_ruleOccurenceCount[rule.Key] == 0 ? 0 : 1 / m_ruleOccurenceCount[rule.Key];
+            float cost = 1 / (1 + temp);
+            int count = 1 / (1 + m_ruleOccurenceCount[rule.Key]);
             float multiplier = rule.Value.RuleMultiplier;
 
             float fri = (m_ruleCostMultiplier * cost + m_ruleCountMultiplier * count) * multiplier;
             fri *= UnityEngine.Random.Range(0f, 1f); // just a random variable
 
             if (fri > thres)
+            {
                 selectedRule = rule.Value;
+                thres = fri;
+            }
         }
 
         Debug.Log("Rule Chosen: " + selectedRule.GetRuleName());
@@ -168,7 +179,7 @@ public class QuestGenerator
                 if (startVerIndex != ic.GetIndexOfGraphInstance())
                     continue;
 
-                if (ic.HasQuestAvailable())
+                if (ic.HasQuestEvent())
                     returnGraphs.Remove(graph);
 
                 break;
