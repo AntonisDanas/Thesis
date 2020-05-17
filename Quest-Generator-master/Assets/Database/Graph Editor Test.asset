@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4434565433981538160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Test1
+  m_EditorClassIdentifier: 
+  Index: 1
+  NodeName: Test 1
+  NodeRect:
+    serializedVersion: 2
+    x: 222
+    y: 230
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Label: Test 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824861efc8e212340ac7523f3087fe90, type: 3}
+  m_Name: Graph Editor Test
+  m_EditorClassIdentifier: 
+  GraphName: Graph Editor Test
+  Nodes:
+  - {fileID: -4434565433981538160}
+  - {fileID: 8909220534571220656}
+  Edges: []
+  InTransition: 0
+--- !u!114 &8909220534571220656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d1f9b0011f7ab4d9962e576e48713d, type: 3}
+  m_Name: n_Test2
+  m_EditorClassIdentifier: 
+  Index: 2
+  NodeName: Test 2
+  NodeRect:
+    serializedVersion: 2
+    x: 555
+    y: 342
+    width: 100
+    height: 35
+  ParentGraph: {fileID: 11400000}
+  IsSelected: 0
+  Label: Test 2

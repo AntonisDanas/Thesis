@@ -22,8 +22,7 @@ MonoBehaviour:
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - Resource
+  Label: 
 --- !u!114 &-7321827901101664808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,8 +77,7 @@ MonoBehaviour:
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - NPC
+  Label: 
 --- !u!114 &-6020574033039579969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +116,7 @@ MonoBehaviour:
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - NPC
+  Label: 
 --- !u!114 &-3065930055207614120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,14 +245,13 @@ MonoBehaviour:
   NodeName: Sword
   NodeRect:
     serializedVersion: 2
-    x: 676
-    y: 80
+    x: 592
+    y: 83
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - Object
+  Label: 
 --- !u!114 &7326096578129132359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,9 +273,8 @@ MonoBehaviour:
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
-  IsSelected: 1
-  Labels:
-  - Enemy
+  IsSelected: 0
+  Label: 
 --- !u!114 &7768801433575699454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,14 +291,13 @@ MonoBehaviour:
   NodeName: Owner
   NodeRect:
     serializedVersion: 2
-    x: 426
-    y: 251
+    x: 457
+    y: 297
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - NPC
+  Label: 
 --- !u!114 &7840709145383968915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,11 +330,10 @@ MonoBehaviour:
   NodeName: Player
   NodeRect:
     serializedVersion: 2
-    x: 199
-    y: 77
+    x: 158
+    y: 50
     width: 100
     height: 35
   ParentGraph: {fileID: 11400000}
   IsSelected: 0
-  Labels:
-  - Player
+  Label: 
