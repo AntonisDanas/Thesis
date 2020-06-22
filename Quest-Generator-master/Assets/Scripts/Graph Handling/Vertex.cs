@@ -7,22 +7,22 @@ namespace SideQuestGenerator.GraphHandling
     {
         private int index;
         private string label;
-        private Dictionary<string, object> vertexAttributes;
+        private StringObjectDictionary vertexAttributes;
         private List<string> edgeIndices;
 
         public Vertex()
-            : this(0, "", new Dictionary<string, object>(), new List<string>()) { }
+            : this(0, "", new StringObjectDictionary(), new List<string>()) { }
 
         public Vertex(int index)
-            : this(index, "", new Dictionary<string, object>(), new List<string>()) { }
+            : this(index, "", new StringObjectDictionary(), new List<string>()) { }
 
         public Vertex(int index, string label)
-            : this(index, label, new Dictionary<string, object>(), new List<string>()) { }
+            : this(index, label, new StringObjectDictionary(), new List<string>()) { }
 
-        public Vertex(int index, string label, Dictionary<string, object> vertexAttributes)
+        public Vertex(int index, string label, StringObjectDictionary vertexAttributes)
             : this(index, label, vertexAttributes, new List<string>()) { }
 
-        public Vertex(int index, string label, Dictionary<string, object> vertexAttributes, List<string> edgeIndices)
+        public Vertex(int index, string label, StringObjectDictionary vertexAttributes, List<string> edgeIndices)
         {
             this.index = index;
             this.label = label;
@@ -54,12 +54,12 @@ namespace SideQuestGenerator.GraphHandling
         {
             if (vertexAttributes == null)
             {
-                vertexAttributes = new Dictionary<string, object>();
+                vertexAttributes = new StringObjectDictionary();
             }
             vertexAttributes.Add(key, attribute);
         }
 
-        public void SetAttributes(Dictionary<string, object> attributes)
+        public void SetAttributes(StringObjectDictionary attributes)
         {
             vertexAttributes = attributes;
         }
@@ -79,7 +79,7 @@ namespace SideQuestGenerator.GraphHandling
             return edgeIndices;
         }
 
-        public Dictionary<string, object> GetAttributes()
+        public StringObjectDictionary GetAttributes()
         {
             return vertexAttributes;
         }
@@ -94,7 +94,7 @@ namespace SideQuestGenerator.GraphHandling
             return vertexAttributes[key];
         }
 
-        public void SetVertex(string label, Dictionary<string, object> attributes, List<string> edgeIndices)
+        public void SetVertex(string label, StringObjectDictionary attributes, List<string> edgeIndices)
         {
             this.label = label;
             vertexAttributes = attributes;

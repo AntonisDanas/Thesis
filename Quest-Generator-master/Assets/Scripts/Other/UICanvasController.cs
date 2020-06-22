@@ -8,7 +8,6 @@ namespace SideQuestGenerator
     public class UICanvasController : MonoBehaviour
     {
         public GameObject QuestBoard;
-        public GameObject QuestBoardBody;
         public GameObject StartQuestButton;
         public Text QuestBoardCharacterName;
         public Text QuestDescription;
@@ -49,6 +48,7 @@ namespace SideQuestGenerator
 
         private void CharacterInteracted(WorldEntity invoker, InteractableCharacter character)
         {
+            Debug.Log("Interacted");
             QuestBoard.SetActive(true);
             QuestBoardCharacterName.text = character.CharacterName;
             m_invoker = invoker;

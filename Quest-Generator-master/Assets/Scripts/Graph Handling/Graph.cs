@@ -27,12 +27,12 @@ namespace SideQuestGenerator.GraphHandling
             AddVertex(new Vertex(verticesCount + 1, vertexLabel));
         }
 
-        public void AddVertex(string vertexLabel, Dictionary<string, object> vertexAttributes)
+        public void AddVertex(string vertexLabel, StringObjectDictionary vertexAttributes)
         {
             AddVertex(new Vertex(verticesCount + 1, vertexLabel, vertexAttributes));
         }
 
-        public void AddVertex(string vertexLabel, Dictionary<string, object> vertexAttributes, List<string> edgeIndices)
+        public void AddVertex(string vertexLabel, StringObjectDictionary vertexAttributes, List<string> edgeIndices)
         {
             AddVertex(new Vertex(verticesCount + 1, vertexLabel, vertexAttributes, edgeIndices));
         }

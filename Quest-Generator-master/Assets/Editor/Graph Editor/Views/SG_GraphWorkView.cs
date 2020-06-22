@@ -1,154 +1,184 @@
-﻿using System;
+﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine;
+#endif
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using SideQuestGenerator.GraphEditor;
 
-namespace SideQuestGenerator.GraphEditor
+[Serializable]
+public class SG_GraphWorkView : SG_ViewBase 
 {
-    [Serializable]
-    public class SG_GraphWorkView : SG_ViewBase
-    {
-        private Vector2 mousePos;
-        private SG_NodeBase selectedNode = null;
+	#region Variables
+	public SG_Graph curGraph;
 
-        public SG_GraphWorkView() : base("Graph Work View") { }
+	Vector2 mousePos;
+	int contextNodeID = 0;
+	#endregion
 
-        public override void UpdateView(Rect editorRect, Rect percentageRect, SG_Graph curGraph)
-        {
-            base.UpdateView(editorRect, percentageRect, curGraph);
+	#region Constructor
+	public SG_GraphWorkView() : base("")
+	{
 
-            if (curGraph != null) ViewTitle = curGraph.GraphName;
-            else ViewTitle = "No graph";
+	}
+	#endregion
 
-            GUI.Box(ViewRect, ViewTitle, viewSkin.GetStyle("WorkViewBG"));
+	#region Main Methods
+	public override void UpdateView (Event e, Rect editorRect, Rect precentageRect)
+	{
+		//Update our Base Derived Class
+		base.UpdateView (e, editorRect, precentageRect);
 
-            GUILayout.BeginArea(ViewRect);
+		//Draw this views GUI
+		GUI.Box (viewRect, viewTitle, viewSkin.GetStyle("WorkViewBG"));
 
-            if (curGraph != null)
-            {
-                Event e = Event.current;
-                curGraph.UpdateGraphGUI(e, editorRect, viewSkin);
-            }
+		//Draw the Grid
+		SG_GraphUtils.DrawEditorGrid (viewRect, 40f, 0.05f, Color.white);
+		SG_GraphUtils.DrawEditorGrid (viewRect, 120f, 0.15f, Color.white);
 
-            GUILayout.EndArea();
-        }
+		//Draw our nodes
+		if(curGraph != null)
+		{
+			viewTitle = curGraph.graphName;
+			curGraph.UpdateGraph(viewRect, e, viewSkin);
+		}
+		else
+		{
+			viewTitle = "No Graph";
+		}
 
-        public override void ProcessEvents(Event e)
-        {
-            base.ProcessEvents(e);
+		//Process this views Events
+		ProcessEvents (e);
+	}
+	#endregion
 
-            mousePos = e.mousePosition;
+	#region Utility Methods
+	protected virtual void ProcessEvents(Event e)
+	{
+		if(viewRect.Contains(e.mousePosition))
+		{
+			if (e.type == EventType.ContextClick)
+			{
+				contextNodeID = 0;
+				mousePos = e.mousePosition;
+				bool inNode = false;
+				if(curGraph != null)
+				{
+					if(curGraph.nodes.Count > 0)
+					{
+						for(int i = 0; i < curGraph.nodes.Count; i++)
+						{
+							if(curGraph.nodes[i].nodeRect.Contains(e.mousePosition))
+							{
+								inNode = true;
+								contextNodeID = i;
+								break;
+							}
+						}
+					}
+				}
 
-            if (!ViewRect.Contains(mousePos)) return;
+				if(!inNode)
+				{
+					ProcessContextMenu(e, 0);
+				}
+				else
+				{
+					if (curGraph.wantsConnection)
+					{
+						if (curGraph.nodes[contextNodeID] != curGraph.connectionNode)
+							SG_EdgePopupWindow.InitEdgePopup(curGraph, curGraph.connectionNode, curGraph.nodes[contextNodeID]);
 
-            // check if in transition to end it
-            if (e.type == EventType.MouseDown &&
-                curGraph != null &&
-                curGraph.InTransition)
-            {
-                if (curGraph.EndTransition(CheckIfMouseOverNode()))
-                    SG_EdgePopupWindow.InitEdgePopup(curGraph,
-                                                    curGraph.transitionStartNode,
-                                                    curGraph.transitionEndNode);
+						curGraph.wantsConnection = false;
+					}
+					else 
+						ProcessContextMenu(e, 1);
+				}
+			}
+		}
+	}
 
-                return;
-            }
+	void ProcessContextMenu(Event e, int contextID)
+	{
+		// Now create the menu, add items and show it
+		GenericMenu menu = new GenericMenu ();
 
-            // check if right click
-            if (e.type == EventType.MouseDown && e.button == 1)
-            {
-                ProcessContextMenu(e);
-            }
-        }
+		if(contextID == 0)
+		{
+			menu.AddItem (new GUIContent ("Create Graph"), false, ContextCallback, "Create Graph");
+			menu.AddItem (new GUIContent ("Load Graph"), false, ContextCallback, "Load Graph");
 
-        private void ProcessContextMenu(Event e)
-        {
-            selectedNode = CheckIfMouseOverNode();
+			if(curGraph != null)
+			{
+				menu.AddSeparator ("");
+				menu.AddItem (new GUIContent ("Unload Graph"), false, ContextCallback, "Unload Graph");
 
-            GenericMenu menu = new GenericMenu();
+				menu.AddSeparator ("");
+				menu.AddItem (new GUIContent ("Add Node"), false, ContextCallback, "Add Node");
+			}
+		}
 
-            if (selectedNode != null)
-            {
-                menu.AddItem(new GUIContent("Delete Node"), false, NodeCallback, "DeleteNode");
-                menu.AddItem(new GUIContent("Make Transition"), false, NodeCallback, "MakeTransition");
+		if(contextID == 1)
+		{
+			if(curGraph != null)
+			{
+				menu.AddItem (new GUIContent ("Delete Node"), false, ContextCallback, "Delete Node");
+				menu.AddItem(new GUIContent("Create Transition"), false, ContextCallback, "Create Transition");
+			}
+		}
+		
+		menu.ShowAsContext ();
+		
+		e.Use();
+	}
 
-                menu.ShowAsContext();
-                return;
-            }
+	void ContextCallback(object obj)
+	{
+		switch(obj.ToString())
+		{
+			case "Create Graph":
+				SG_GraphPopupWindow.InitGraphPopup(0);
+				break;
 
-            menu.AddItem(new GUIContent("Create Graph"), false, ContextCallback, "CreateGraph");
-            menu.AddItem(new GUIContent("Load Graph"), false, ContextCallback, "LoadGraph");
+			case "Load Graph":
+				curGraph = SG_GraphUtils.LoadGraph();
+				SetPropertyView(curGraph);
+				break;
 
-            if (curGraph != null)
-            {
-                menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Unload Graph"), false, ContextCallback, "UnloadGraph");
+			case "Unload Graph":
+				curGraph = null;
+				SetPropertyView(curGraph);
+				break;
 
-                menu.AddSeparator("");
-                menu.AddItem(new GUIContent("Add Node"), false, ContextCallback, "AddNode");
-            }
+			case "Add Node":
+				SG_SpaceNodePopupWindow.InitSpaceNodePopup(0, curGraph, mousePos);
+				break;
 
-            menu.ShowAsContext();
+			case "Delete Node":
+				SG_GraphUtils.DeleteNode(contextNodeID, curGraph);
+				break;
 
-            //e.Use();
-        }
+			case "Create Transition":
+				curGraph.wantsConnection = true;
+				curGraph.connectionNode = curGraph.nodes[contextNodeID];
+				break;
 
-        private void ContextCallback(object obj)
-        {
-            switch (obj.ToString())
-            {
-                case "CreateGraph":
-                    SG_GraphPopupWindow.InitGraphPopup();
-                    break;
-                case "LoadGraph":
-                    SG_GraphUtil.LoadGraph();
-                    break;
-                case "UnloadGraph":
-                    SG_GraphUtil.UnloadGraph();
-                    break;
-                case "AddNode":
-                    SG_NodePopupWindow.InitNodePopup(curGraph, mousePos);
-                    break;
-                default:
-                    break;
-            }
-        }
+			default:
+				break;
+		}
+	}
 
-        private void NodeCallback(object obj)
-        {
-            switch (obj.ToString())
-            {
-                case "DeleteNode":
-                    SG_GraphUtil.DeleteNode(curGraph, selectedNode);
-                    break;
-                case "MakeTransition":
-                    CreateTransition();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private SG_NodeBase CheckIfMouseOverNode()
-        {
-            if (curGraph != null)
-            {
-                foreach (var node in curGraph.Nodes)
-                {
-                    if (node.NodeRect.Contains(mousePos))
-                    {
-                        return node;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private void CreateTransition()
-        {
-            if (curGraph == null || curGraph.InTransition) return;
-
-            curGraph.StartTransition(selectedNode);
-        }
-    }
+	public void SetPropertyView(SG_Graph curGraph)
+	{
+		SG_GraphEditorWindow curEditor = (SG_GraphEditorWindow)EditorWindow.GetWindow<SG_GraphEditorWindow>();
+		if(curEditor != null)
+		{
+			if(curEditor.propertyView != null)
+			{
+				curEditor.propertyView.curGraph = curGraph;
+			}
+		}
+	}
+	#endregion
 }

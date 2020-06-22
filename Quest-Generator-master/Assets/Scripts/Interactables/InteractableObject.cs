@@ -8,7 +8,7 @@ namespace SideQuestGenerator.InteractableHandling
     {
         public string ObjectName { get { return m_objectName; } }
 
-        [SerializeField] private SG_SpaceNode m_graphInstance;
+        [SerializeField] private SG_ObjectNode m_graphInstance;
         [SerializeField] private string m_objectName;
 
         // Start is called before the first frame update
@@ -22,7 +22,7 @@ namespace SideQuestGenerator.InteractableHandling
                 return;
             }
 
-            m_objectName = m_graphInstance.NodeName;
+            m_objectName = m_graphInstance.nodeName;
 
         }
 

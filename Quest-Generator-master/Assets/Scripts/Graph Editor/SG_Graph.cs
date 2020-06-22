@@ -1,133 +1,189 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+#endif
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SideQuestGenerator.GraphEditor
 {
-#endif
+	[Serializable]
+	public class SG_Graph : ScriptableObject
+	{
+		#region Public Variables
+		public bool wantsConnection = false;
+		public string graphName = "NewGraph";
+		public List<SG_NodeBase> nodes;
+		public List<SG_Edge> edges;
 
-    [Serializable]
-    public class SG_Graph : ScriptableObject
-    {
-        public string GraphName = "Graph";
-        public List<SG_NodeBase> Nodes;
-        public List<SG_Edge> Edges;
-        public bool InTransition = false;
+		//create list for edges
 
-        public SG_NodeBase transitionStartNode { get; private set; }
-        private Vector2 transitionStartCenter;
-        public SG_NodeBase transitionEndNode { get; private set; }
-        private Vector2 transitionEndCenter;
+		public SG_NodeBase selectedNode;
+		public SG_NodeBase connectionNode;
+		public bool showProperties = false;
+		#endregion
 
-        private void OnEnable()
-        {
-            if (Nodes == null) Nodes = new List<SG_NodeBase>();
-            if (Edges == null) Edges = new List<SG_Edge>();
-        }
+		#region Private Variables
+		#endregion
 
-        public void InitGraph()
-        {
-            if (Nodes.Count > 0)
-            {
-                foreach (var node in Nodes)
-                    node.InitNode(node.NodeName);
+		#region Main Methods
+		void OnEnable()
+		{
+			if (nodes == null)
+			{
+				nodes = new List<SG_NodeBase>();
+			}
 
-            }
+			if (edges == null)
+			{
+				edges = new List<SG_Edge>();
+			}
+		}
 
-            if (Edges.Count > 0)
-            {
-                foreach (var edge in Edges)
-                    edge.InitEdge(edge.StartNode, edge.EndNode, edge.Label, edge.ParentGraph);
-            }
-        }
+		public void InitGraph()
+		{
+			if (nodes.Count > 0)
+			{
+				for (int i = 0; i < nodes.Count; i++)
+				{
+					nodes[i].InitNode();
+				}
+			}
 
-        public void UpdateGraph()
-        {
-            if (Nodes.Count > 0)
-            {
+			if (edges.Count > 0)
+			{
+				foreach (var edge in edges)
+					edge.InitEdge(edge.StartNode, edge.EndNode, edge.Label, edge.Reason, edge.ParentGraph);
+			}
+		}
 
-            }
-        }
+		public void UpdateGraph(Rect viewRect, Event e, GUISkin editorSkin)
+		{
+			if (nodes.Count > 0)
+			{
+				ProcessEvents(e, viewRect);
 
-        public List<SG_Edge> GetAllNodeEdges(SG_NodeBase selectedNode)
-        {
-            List<SG_Edge> edges = new List<SG_Edge>();
+				if (wantsConnection)
+				{
+					if (connectionNode != null)
+					{
+						DrawConnectionToMouse(e.mousePosition);
+					}
+				}
 
-            foreach (var edge in Edges)
-            {
-                if (edge.StartNode == selectedNode || edge.EndNode == selectedNode)
-                    edges.Add(edge);
-            }
+				for (int i = 0; i < nodes.Count; i++)
+				{
+					nodes[i].UpdateNode(viewRect, e, editorSkin);
+				}
 
-            return edges;
-        }
+				for (int i = 0; i < edges.Count; i++)
+				{
+					edges[i].UpdateEdgeGUI(e, viewRect, editorSkin);
+				}
+
+				if (e.type == EventType.Layout)
+				{
+					if (selectedNode != null)
+					{
+						showProperties = true;
+					}
+				}
+			}
+
+			EditorUtility.SetDirty(this);
+		}
+		#endregion
 
 #if UNITY_EDITOR
-        public void UpdateGraphGUI(Event e, Rect viewRect, GUISkin viewSkin)
-        {
-            if (InTransition)
-            {
-                DrawTransitionLine(e.mousePosition);
-            }
+		#region Utility Methods
+		void ProcessEvents(Event e, Rect viewRect)
+		{
+			if (viewRect.Contains(e.mousePosition))
+			{
+				if (e.button == 0)
+				{
+					if (e.type == EventType.MouseDown)
+					{
+						DeselectAllNodes();
+						showProperties = false;
+						selectedNode = null;
+						bool setNode = false;
+						for (int i = nodes.Count - 1; i >= 0; i--)
+						{
+							if (!setNode)
+							{
+								if (nodes[i].nodeRect.Contains(e.mousePosition))
+								{
+									nodes[i].isSelected = true;
+									selectedNode = nodes[i];
+									setNode = true;
+									break;
+								}
+							}
+						}
 
-            if (Edges.Count > 0)
-            {
-                foreach (var edge in Edges)
-                    edge.UpdateEdgeGUI(e, viewRect, viewSkin);
-            }
+						if (!setNode)
+						{
+							for (int i = nodes.Count - 1; i >= 0; i--)
+							{
+								nodes[i].isSelected = false;
+								selectedNode = null;
+							}
+						}
 
-            if (Nodes.Count > 0)
-            {
-                foreach (var node in Nodes)
-                    node.UpdateNodeGUI(e, viewRect, viewSkin);
-            }
+						if (wantsConnection)
+						{
+							wantsConnection = false;
+						}
+					}
+				}
+			}
 
-            ProcessEvents(e, viewRect);
+			if (e.type == EventType.MouseUp)
+			{
 
-            EditorUtility.SetDirty(this); //It says to Unity Editor to save the scriptale object
-        }
+			}
+		}
 
-        public void StartTransition(SG_NodeBase startingNode)
-        {
-            transitionStartNode = startingNode;
-            transitionStartCenter = startingNode.NodeRect.center;
-            InTransition = true;
-            transitionEndNode = null; //making sure end node is null
-        }
+		void DrawConnectionToMouse(Vector2 mousePos)
+		{
+			Handles.BeginGUI();
+			Handles.color = Color.green;
+			Handles.DrawLine(new Vector3(connectionNode.nodeRect.x + connectionNode.nodeRect.width * 0.5f,
+										 connectionNode.nodeRect.y + connectionNode.nodeRect.height * 0.5f, 0f),
+							 new Vector3(mousePos.x, mousePos.y, 0f));
 
-        // returns true if a transition has successfully ended
-        public bool EndTransition(SG_NodeBase endingNode)
-        {
-            InTransition = false;
 
-            if (endingNode == null) return false;
-            if (endingNode == transitionStartNode) return false;
+			Handles.EndGUI();
+		}
 
-            transitionEndNode = endingNode;
-            transitionEndCenter = endingNode.NodeRect.center;
-
-            Debug.Log($"Connecting {transitionStartNode.name} with {transitionEndNode.name}");
-            return true;
-        }
-
-        private void DrawTransitionLine(Vector2 mousePos)
-        {
-            Handles.BeginGUI();
-            Handles.color = Color.white;
-            Handles.DrawLine(new Vector3(transitionStartCenter.x, transitionStartCenter.y, 0f),
-                            new Vector3(mousePos.x, mousePos.y, 0f));
-            Handles.EndGUI();
-        }
+		void DeselectAllNodes()
+		{
+			for (int i = nodes.Count - 1; i >= 0; i--)
+			{
+				nodes[i].isSelected = false;
+			}
+		}
+		#endregion
 
 #endif
 
-        private void ProcessEvents(Event e, Rect viewRect)
-        {
+		public List<SG_Edge> GetAllNodeEdges(SG_NodeBase selectedNode)
+		{
+			if (edges == null) return null;
+			List<SG_Edge> e = new List<SG_Edge>();
 
-        }
-    }
+			foreach (var edge in edges)
+			{
+
+				if (edge.StartNode.name == selectedNode.name || edge.EndNode.name == selectedNode.name)
+					e.Add(edge);
+			}
+
+			return e;
+		}
+
+
+	}
 }

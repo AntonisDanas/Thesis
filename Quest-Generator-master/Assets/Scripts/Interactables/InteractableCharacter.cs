@@ -13,7 +13,7 @@ namespace SideQuestGenerator.InteractableHandling
 
         public List<Relationship> OutgoingRelationships;
 
-        [SerializeField] private SG_SpaceNode m_graphInstance;
+        [SerializeField] private SG_NPCNode m_graphInstance;
         [SerializeField] private string m_characterName;
         [SerializeField] private GameObject m_questMarkPlaceholder;
 
@@ -29,7 +29,7 @@ namespace SideQuestGenerator.InteractableHandling
                 return;
             }
 
-            m_characterName = m_graphInstance.NodeName;
+            m_characterName = m_graphInstance.nodeName;
             OutgoingRelationships = FindObjectOfType<GraphHandler>().GetAllOutgoingRelationships(m_graphInstance.Index);
             EntityEventBroker.OnCharactersStatusUpdate += UpdateCharacterStatus;
         }

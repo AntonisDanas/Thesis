@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5145041136035034019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc8164f7d31793468c1836a9f9f6533, type: 3}
+  m_Name: n_Player
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 202
+    y: 326
+    width: 180
+    height: 45
+  nodeName: Player
+  nodeType: 0
+  nodePath: 
+  parentGraph: {fileID: 11400000}
+  Index: 1
+  Label: NPC
+  Attributes:
+    m_keys:
+    - Name
+--- !u!114 &-823656451952510996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc8164f7d31793468c1836a9f9f6533, type: 3}
+  m_Name: n_Warrior
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 510
+    y: 247
+    width: 180
+    height: 45
+  nodeName: Warrior
+  nodeType: 0
+  nodePath: 
+  parentGraph: {fileID: 11400000}
+  Index: 2
+  Label: NPC
+  Attributes:
+    m_keys:
+    - Name
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de37645b4c81b44abc2a9e0ccc8f95f, type: 3}
+  m_Name: Test 1
+  m_EditorClassIdentifier: 
+  wantsConnection: 0
+  graphName: Test 1
+  nodes:
+  - {fileID: -5145041136035034019}
+  - {fileID: -823656451952510996}
+  edges:
+  - {fileID: 1460121314275078479}
+  selectedNode: {fileID: 0}
+  connectionNode: {fileID: -823656451952510996}
+  showProperties: 0
+--- !u!114 &1460121314275078479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe1c11a385699e47a3044a6d1ee230c, type: 3}
+  m_Name: e_Warrior_Neutral_Player
+  m_EditorClassIdentifier: 
+  StartNode: {fileID: -823656451952510996}
+  EndNode: {fileID: -5145041136035034019}
+  Label: Neutral
+  Reason: 
+  ParentGraph: {fileID: 11400000}

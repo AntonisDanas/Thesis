@@ -70,7 +70,7 @@ namespace SideQuestGenerator.Scheduling
                 StartCoroutine(m_questGenerator.GenerateNewQuest());
 
                 m_timePassed = 0f;
-                m_timeGoal = UnityEngine.Random.Range(MinQuestGenerationThreshold, MaxQuestGenerationThreshold);
+                m_timeGoal = Random.Range(MinQuestGenerationThreshold, MaxQuestGenerationThreshold);
             }
         }
 
@@ -79,7 +79,7 @@ namespace SideQuestGenerator.Scheduling
             m_graph = new Graph();
             int index = 1;
             string label = "NPC";
-            Dictionary<string, object> attributes1 = new Dictionary<string, object>();
+            StringObjectDictionary attributes1 = new StringObjectDictionary();
             attributes1.Add("Name", "Regal Regis");
             attributes1.Add("Alive", true);
             attributes1.Add("Rank", "King");
@@ -87,7 +87,7 @@ namespace SideQuestGenerator.Scheduling
             Vertex regal_regis = new Vertex(index, label, attributes1);
             index++;
 
-            Dictionary<string, object> attributes2 = new Dictionary<string, object>();
+            StringObjectDictionary attributes2 = new StringObjectDictionary();
             attributes2.Add("Name", "Fancy Fanny");
             attributes2.Add("Alive", true);
             attributes2.Add("Rank", "Queen");
@@ -95,7 +95,7 @@ namespace SideQuestGenerator.Scheduling
             Vertex fancy_fanny = new Vertex(index, label, attributes2);
             index++;
 
-            Dictionary<string, object> attributes3 = new Dictionary<string, object>();
+            StringObjectDictionary attributes3 = new StringObjectDictionary();
             attributes3.Add("Name", "Smug Smith");
             attributes3.Add("Alive", true);
             attributes3.Add("Rank", "Lord");

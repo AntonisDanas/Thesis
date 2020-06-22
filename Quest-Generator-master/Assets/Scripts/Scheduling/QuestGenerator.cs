@@ -78,7 +78,7 @@ namespace SideQuestGenerator.Scheduling
             // If no match found find other rule
             List<Graph> returnGraphs = m_graphHandler.SearchForPattern(r);
 
-            if (returnGraphs.Count == 0)
+            if (returnGraphs == null || returnGraphs.Count == 0)
             {
                 Debug.Log("No available characters for the pattern");
                 m_questScheduler.QuestGenerated(null);

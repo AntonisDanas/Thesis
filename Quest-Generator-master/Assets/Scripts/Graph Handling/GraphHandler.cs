@@ -25,10 +25,10 @@ namespace SideQuestGenerator.GraphHandling
         {
             if (SpaceGraph == null) return;
 
-            if (SpaceGraph.Nodes == null || SpaceGraph.Nodes.Count == 0) return;
+            if (SpaceGraph.nodes == null || SpaceGraph.nodes.Count == 0) return;
 
-            List<SG_NodeBase> snodes = SpaceGraph.Nodes;
-            List<SG_Edge> sedges = SpaceGraph.Edges;
+            List<SG_NodeBase> snodes = SpaceGraph.nodes;
+            List<SG_Edge> sedges = SpaceGraph.edges;
 
             m_graph = new Graph();
 
@@ -36,8 +36,8 @@ namespace SideQuestGenerator.GraphHandling
             {
                 Vertex v = new Vertex();
                 v.SetIndex(node.Index);
-                v.SetLabel((node as SG_SpaceNode).Label);
-                v.SetAttribute("Name", node.NodeName);
+                v.SetLabel(node.Label);
+                v.SetAttribute("Name", node.nodeName);
                 m_graph.AddVertex(v);
             }
 
@@ -428,7 +428,7 @@ namespace SideQuestGenerator.GraphHandling
     public class CharacterStatus
     {
         public string Label;
-        public Dictionary<string, object> Attributes = new Dictionary<string, object>();
+        public StringObjectDictionary Attributes = new StringObjectDictionary();
         public List<Relationship> OutgoingRelationships = new List<Relationship>();
     }
 }
